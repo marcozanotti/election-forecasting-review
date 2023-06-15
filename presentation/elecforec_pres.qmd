@@ -1,0 +1,420 @@
+---
+title: "Conjugate Gradient Method"
+author: "Marco Zanotti"
+institute: "University Milano-Bicocca"
+format: 
+ beamer:
+  theme: Dresden
+  colortheme: default
+  navigation: horizontal
+  header-includes: \titlegraphic{\includegraphics[width=0.2\paperwidth]{img/logo-giallo.png}}
+execute:
+  echo: false
+---
+
+## Contents
+
+```{r}
+library(lattice)
+source("R/utils.R")
+```
+
+1.  Line Search - Review
+
+2.  Conjugate Direction
+
+3.  Conjugate Gradient
+
+4.  Application: Linear Regression
+
+
+# 1. Line Search - Review
+
+## Problem
+
+$$min \; f(x) = \frac{1}{2} x^TAx - b^Tx \;\; (1)$$  
+
+where $A$ is an $n \times n$ symmetric and positive definite matrix, that is $f$ is 
+a convex quadratic function.  
+
+\
+Solving w.r.t $x$ implies  
+
+$\nabla f(x) = Ax - b = 0 \implies Ax = b$
+
+\
+hence, at point $x = x_k$  
+
+$\nabla f(x_k) = Ax_k - b = 0 \implies Ax_k = b$ 
+
+
+## Line Search
+
+<!-- The LS method is an iterative method that at each iteration computes the -->
+<!-- search direction and then decides how far to move along that direction. -->
+
+Each iteration is given by
+
+$$x_{k+1} = x_{k} + \alpha_{k}p_{k}$$
+
+![](img/img1.png){fig-align="center" width="255"}
+
+where $\alpha_{k}$ is the step length and $p_{k}$ is the direction.
+
+<!-- The success of Line Search methods depends on effective choices of both these parameters. -->
+
+## Line Search
+
+The direction often has the form
+
+$$p_{k} = - B_{k}^{-1} \nabla f_{k}$$
+
+where $B_{k}$ is a symmetric, nonsingular matrix.
+
+In the Steepest Descent $B_{k} = I$.\
+In the Newton's method $B_{k} = \nabla^2 f_{k}$.
+
+<!-- So if Bk is positive definite, it means that the function is convex and the -->
+<!-- direction pk is actually a descent direction. -->
+
+
+## Steepest Descent - Simulation
+
+$$
+f(x_1,x_2) = 
+x_1^2 + x_2^2 + \frac{3}{2}x_1x_2 = 
+\frac{1}{2}x^T
+\begin{bmatrix} 2 & \frac{3}{2} \\ \frac{3}{2} & 2 \\ \end{bmatrix}
+x-
+\begin{bmatrix} 0 \\ 0 \\ \end{bmatrix}
+x
+$$
+
+![](img/img2.png){fig-align="center" width="210"}
+
+
+## Steepest Descent - Simulation
+
+::: columns
+::: {.column width="40%"}
+
+\
+
+- SD is inefficient and slow to converge since it often requires 
+many iterations to reach the optimum.  
+
+\
+
+- 15 iterations to reach a tolerance of 0.01
+:::
+
+::: {.column width="60%"}
+$$f(x_1,x_2) = x_1^2 + x_2^2 + \frac{3}{2}x_1x_2$$
+![](img/img3.png){fig-align="center" width="220"}
+:::
+:::
+
+<!-- how can we improve over the SD method? -->
+
+
+# 2. Conjugate Direction
+
+## Intuition
+
+$f(x_1,x_2) = x_1^2 + x_2^2 + \frac{3}{2}x_1x_2$
+
+![](img/img4.png){fig-align="center" width="250"}  
+
+The red dashed arrow is the SD direction at the second step.
+
+
+## Definition: Conjugate Vectors
+
+A set of nonzero vectors $\{p_0, p_1, ..., p_n\}$ is said to be **conjugate** 
+(or $A$-orthogonal) with respect to a symmetric positive definite matrix $A$ 
+if and only if  
+
+$$p_i^TAp_j = 0, \;\;\;\;\;\; \forall\;i \neq j$$
+
+\
+Moreover, any set of vectors satisfying the **conjugacy** property is also 
+**linearly independent**.
+
+
+## Why is conjugacy relevant?
+
+It is possible to solve $(1)$ in exactly $n$ steps by successively 
+minimizing it along the individual **conjugate** directions. 
+
+
+## Theorem
+
+Let the following be a (simple) **conjugate** direction method:    
+given a starting point $x_0 \in R^n$ and a set of **conjugate** directions 
+$\{p_0, p_1, ..., p_{n-1}\}$, at each iteration $k$ a point is chosen such that
+
+$$x_{k+1} = x_{k} + \alpha_{k}p_{k} \;\; (2)$$
+
+where $\alpha_{k}$ is the step length and $p_{k}$ is the **conjugate** direction.
+
+The method converges to the solution $x^*$ of (1) in at most $n$ steps.  
+
+
+## Proof
+
+First, $\alpha_{k}$ is the one-dimensional minimizer of $(1)$ along 
+$x_{k} + \alpha_{k}p_{k}$ and can be computed explicitly by
+
+$$\nabla f_\alpha(x_k + \alpha_k p_k) = (x_k + \alpha_kp_k)^TAp_k - b^Tp_k$$
+
+setting equal to 0 and solving for $\alpha$
+
+$$(x_k + \alpha_kp_k)^TAp_k - b^Tp_k = 0$$
+$$\alpha_k = \frac{(b^T - Ax_k)p_k}{p_k^TAp_k}$$
+$$\;\;\; \alpha_k = \frac{-\nabla f(x_k)p_k}{p_k^TAp_k} \;\; (3)$$ 
+
+<!-- this is the optimal step length, hence (2) and (3) together form our  -->
+<!-- conjugate direction method. -->
+
+
+## Proof - Continue
+
+It can be observed that, since the directions $\{p_i\}$ are linearly independent,
+they form a basis on $R^n$, implying they span the whole space.  
+  
+  
+Hence, the solution $x^*$ can be represented as  
+
+$$x^* = x_0 + \delta_0p_0 + \delta_1p_1 + ... + \delta_{n-1}p_{n-1}$$
+
+
+## Proof - Continue
+
+For some choice of the scalars $\delta_k$ and premultiplying by $p_k^TA$
+
+$$p_k^TA(x^* - x_0) = p_k^TA(\delta_0p_0 + \delta_1p_1 + ... + \delta_{k}p_{k})$$  
+
+and using the conjugacy property $p_i^TAp_j = 0$
+
+$$p_k^TA(x^* - x_0) = p_k^TA\delta_{k}p_{k}$$
+$$\delta_{k} = \frac{p_k^TA(x^* - x_0)}{p_k^TAp_{k}} \;\; (4)$$
+
+
+## Proof - Continue
+
+Now, suppose that $x_k$ is generate by $(2)$ and $(3)$, then  
+$$x_k = x_0 + \alpha_0p_0 + \alpha_1p_1 + ... + \alpha_{k-1}p_{k-1}$$
+
+premultiplying by $p_k^TA$ and using the conjugacy $p_i^TAp_j = 0$
+$$p_k^TA(x_k - x_0) = p_k^TA(\alpha_0p_0 + \alpha_1p_1 + ... + \alpha_{k-1}p_{k-1})$$
+$$p_k^TA(x_k - x_0) = 0$$
+
+if this holds true for $x_k$ it must hold also for $x^*$, hence
+$$p_k^TA(x^* - x_0) = p_k^TA(x^* - x_k) = p_k^T(b - Ax_k) = - p_k^T \nabla f(x_k)$$
+
+
+## Proof - End
+
+Now, using the fact that $p_k^TA(x^* - x_0) = - p_k^T \nabla f(x_k)$
+
+$$
+(4) \;\; \delta_{k} = 
+\frac{p_k^TA(x^* - x_0)}{p_k^TAp_{k}} = 
+\frac{- p_k^T \nabla f(x_k)}{p_k^TAp_{k}} = 
+\alpha_k \;\; (3)
+$$
+
+The coefficients $\delta_k$ coincide with the step lengths $\alpha_k$, proving
+the theorem.
+
+
+# 3. Conjugate Gradient
+
+## How to find the conjugate directions?
+
+<!-- The discussion so far has been general, meaning that it applies to a conjugate -->
+<!-- direction method (2), (3) based on any choice of the conjugate direction set p. -->
+
+To use $(2)$-$(3)$, it remains to find $n$ $A$-orthogonal vectors $p_k$.  
+
+One way, use
+$$\{v: Av = \lambda v\}$$
+the set of eigenvectors of $A$.  
+
+These are mutually orthogonal as well as conjugate with respect to $A$ and 
+could be used as the conjugate directions $\{p_0,p_1,...,p_{n-1}\}$.  
+
+In general to find the eigenvectors of a matrix is inefficient since
+it requires an excessive amount of computations.  
+
+
+## Conjugate Gradient - Basic Property
+
+The Conjugate Gradient method is a conjugate direction method with a very 
+special property:  
+
+In generating the set of conjugate directions, it can compute a new direction
+$p_k$ by using only the previous direction $p_{k-1}$.
+
+It does not need to know all the previous elements ${p_0, p_1, ..., p_{k-1}}$ 
+of the conjugate set, since $p_k$ is automatically conjugate to all the 
+previous directions.
+
+
+## Find $p_k$
+
+In the basic CG method, each direction $p_k$ is chosen to be a linear
+combination of the SD direction and the previous direction $p_{k-1}$.
+$$p_k = - \nabla f(x_k) + \beta_k p_{k-1} \;\; (5)$$
+
+where the scalar $\beta_k$ is derived from $(5)$ imposing $p_i^TAp_j = 0$
+$$p_{k-1}^TAp_k = p_{k-1}^TA (- \nabla f(x_k) + \beta_k p_{k-1})$$
+$$0 = p_{k-1}^TA (- \nabla f(x_k) + \beta_k p_{k-1})$$
+$$\beta_k  = \frac{p_{k-1}^TA \nabla f(x_k)}{p_{k-1}^TAp_{k-1}} \;\; (6)$$
+
+
+## Algorithm
+
+Given $x_0$, set $\nabla f(x_0) = Ax_0 - b$, $p_0 = - \nabla f(x_0)$, $k = 0$  
+
+**while** $\nabla f(x_k) \neq 0$
+$$\alpha_k = - \frac{\nabla f(x_k)^Tp_k}{p_k^TAp_k} \;\; (3)$$
+$$x_{k+1} = x_{k} + \alpha_{k}p_{k} \;\; (2)$$
+$$\nabla f(x_{k+1}) = Ax_{k+1} - b$$
+$$\beta_{k+1} = \frac{\nabla f(x_{k+1})^TAp_k}{p_k^TAp_k} \;\; (6)$$
+$$p_{k+1} = - \nabla f(x_{k+1}) + \beta_{k+1}p_k \;\; (5)$$
+$$k = k + 1$$
+
+
+## Conjugate Gradient - Simulation
+
+::: columns
+::: {.column width="40%"}
+
+\
+
+- CG is much more efficient than SD and it takes at most $n$ iterations to reach 
+the optimum.  
+
+\
+
+- 2 iterations to reach a tolerance of 0.01
+:::
+
+::: {.column width="60%"}
+$$f(x_1,x_2) = x_1^2 + x_2^2 + \frac{3}{2}x_1x_2$$
+![](img/img5.png){fig-align="center" width="220"}
+:::
+:::
+
+
+## Conclusions
+
+- CG is more efficient than SD since it reaches the optimum in at most 
+$n$ iterations
+
+- It is suitable especially for large scale optimization problems since 
+it requires minimum storage and computation
+
+- The method is sensitive to its starting position
+
+- The method works with quadratic or quadratic-like functions, 
+or where the function is approximately quadratic near the optimum
+
+CG method has been improved and adapted to minimize general convex functions 
+and even general nonlinear functions.
+
+
+# 4. Application: Linear Regression
+
+## Dataset: GapMinder
+
+```{r}
+library(knitr)
+library(tidyverse)
+library(gapminder)
+library(bench)
+
+# prepare the dataset
+gap_clean <- gapminder::gapminder %>% 
+	tidyr::pivot_wider(names_from = continent, values_from = continent) %>% 
+	dplyr::mutate(dplyr::across(Asia:Oceania, ~ ifelse(is.na(.), 0, 1))) %>% 
+	dplyr::mutate(dplyr::across(pop:gdpPercap, ~ as.numeric(scale(.)))) %>% 
+	dplyr::mutate(Intercept = 1, .before = pop) %>% 
+	dplyr::select(-country, -year, -Africa)
+y_vec <- as.matrix(gap_clean$lifeExp)
+x_mat <- as.matrix(gap_clean[, -1])
+
+# function to compute regression betas via CG optimization
+conjugate_gradient_lm <- function(y_vec, x_mat) {
+	
+	beta_vec <- matrix(0, nrow = ncol(x_mat), ncol = 1) # initial guess for betas
+	A <- t(x_mat) %*% x_mat # derive matrix A
+	b <- t(x_mat) %*% y_vec # derive vector b
+	fg <- A %*% beta_vec - b # residuals = gradient of f
+	p <- -fg # p search direction
+	k <- 0 # number of iterations
+	
+	while (norm(fg, "2") > 0.01) {
+		
+		alpha <- as.numeric((t(fg) %*% fg) / (t(p) %*% A %*% p)) # step length alpha
+		beta_vec <- beta_vec + alpha * p # update beta coefficients
+		fg1 <- fg + alpha * A %*% p # update gradient of f
+		beta1 <- as.numeric((t(fg1) %*% fg1) / (t(fg) %*% fg)) # calculate beta for search direction
+		p1 <- -fg1 + beta1 * p # update search direction (p)
+		fg <- fg1
+		p <- p1
+		k <- k + 1
+	}
+	
+	return(beta_vec)
+	
+}
+
+# compute betas coefficients
+mod_cg <- conjugate_gradient_lm(y_vec, x_mat)
+mod_lm <- lm(lifeExp ~ . - 1, data = gap_clean)
+results <- data.frame(
+	"beta_CG" = mod_cg %>% round(5),
+	"beta_lm" = coefficients(mod_lm) %>% round(5)
+)
+# computational results
+comp_res <- bench::mark(
+	lm(lifeExp ~ . - 1, data = gap_clean),
+	conjugate_gradient_lm(y_vec, x_mat),
+	iterations = 1000, 
+	check = FALSE
+) %>% 
+	dplyr::mutate(expression = c("LM", "GC")) %>% 
+	dplyr::select(expression, median, mem_alloc, n_itr) %>% 
+	dplyr::rename(method = expression)
+```
+
+```{r}
+knitr::kable(head(gap_clean[, -8]), digits = 2)
+```
+
+
+## CG algorithm implementation
+
+![](img/img6.png){fig-align="center" width="400"}
+
+
+## CG results
+
+```{r}
+knitr::kable(results)
+knitr::kable(comp_res)
+```
+
+
+## References
+
+J. Nocedal and S. Wright, Numerical Optimization, 2006, Springer 
+
+
+## 
+
+\center Thank you! \center
+
+\
