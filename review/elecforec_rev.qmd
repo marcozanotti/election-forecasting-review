@@ -39,9 +39,14 @@ looks like, for margins and spacing.
 
 :::{add-textheight=".5in"}
 
-@gelm:veht:2021 offer some guidance about key ideas about statistical ideas.
-On an unrelated note, spreadsheets are important to use correctly [@brom:woo:2018].
-Log-linear models are an attractive way to model categorical data [@bish:fien:1975].
+@abr:2008 offer some guidance about key ideas about statistical ideas.
+[@abr:2008]
+[@bro:cha:1999]
+[@cam:1996]
+[@gel:kin:1993]
+[@loc:gel:2010]
+[@rig:2009]
+[@lin:2013]
 
 The quick brown fox jumped over the lazy dog.
 The quick brown fox jumped over the lazy dog.
