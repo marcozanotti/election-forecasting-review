@@ -1,5 +1,5 @@
 ---
-title: "Conjugate Gradient Method"
+title: "Dynamic Forecasting of US Elections"
 author: "Marco Zanotti"
 institute: "University Milano-Bicocca"
 format: 
@@ -7,7 +7,9 @@ format:
   theme: Dresden
   colortheme: default
   navigation: horizontal
-  header-includes: \titlegraphic{\includegraphics[width=0.2\paperwidth]{img/logo-giallo.png}}
+  header-includes: |
+       \titlegraphic{\includegraphics[width=0.2\paperwidth]{img/logo-giallo.png}}
+       \setbeamertemplate{page number in head/foot}[totalframenumber]
 execute:
   echo: false
 ---
