@@ -2,7 +2,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- https://marcozanotti.github.io/election-forecasting-review/ -->
 
-The review article and the presentation for the Bayeasian Statistics
+The review article and the presentation for the Bayesian Statistics
 course.
 
 [Dynamic Forecasting of US Elections - Review
