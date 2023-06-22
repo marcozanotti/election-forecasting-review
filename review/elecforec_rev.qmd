@@ -136,60 +136,40 @@ politacal strategies to allocated mln of dollars in campaigns of candidates
 
 
 
-
-
-
-
 ## Data
 
-List, differences in the availability   
-Nation variables or state variables
+Forecasting elections makes use of mainly two different types data: the so-called
+fundamental variables, that is economic or political indicators, and polls data.
+The former are historical time series covering various aspects of US economy and 
+politics, and are usually available within 6 months of the Election day. 
+The latter are the surveys issued by official pollsters' agency that includes
+trail-heat questions (i.e. at least a question on vote preference between the 
+two major parties). 
+In recent times, all this data is often available in both national and state levels.
 
 
 ### Economic and Political Indicators
 
-Economy matters! An in-party presidential candidate running in the context of a booming economy
-would win a greater share of the vote than with a slugghish economy.
+Numerous researchers over many decades discovered and analysed the importance 
+of some economic variables that strongly affect and anticipate election results. 
+In particular, economy usually matters since an in-party presidential candidate 
+running in the context of a booming economy would win a greater share of the 
+vote than with a sluggish economy. Among the most used economic indicator there 
+are GDP, GNP, unemployment, inflation at national or state level. 
 
-Given the relevance of the topic, numerous researchers over many decades discovered
-and analysed the importance of some economic variables that strongly affect and
-anticipate the election results. 
+The political dimension of election is also, obviously, of high relevance and 
+it it usually measured by incumbency, votes of previous elections, presidential 
+home-state advantage, partisanship of a state (proportion of democrats in last 
+legislature), president approval rating, distance between state and candidate 
+ideologies, and the time-for-change variable (if a party has controlled 
+the White House for two or more terms). Sometimes also regional variables have 
+been adopted to highlight southern and northern differences.
 
-This data is typically available before the start of the campaign. 
+Many models have been developed using only such data and predicted the results 
+within few percentage points.
 
-growths in GDP, GNP, unemployment, inflation in the last available quarter before the elections
-growths in gdp (or others) by states 
-
-incumbency (usually a dummy), national and states vote of last two elections, 
-presidential home-state advantage, partisanship of a state (proportion of democrats 
-in last legislature), 
-president approval rating (officially estimated by national agencies), this consider
-he's foreign affairs, personal style, communication skills, honesty, integrity, 
-domestic agenda, etc
-distance between state and candidate ideologies, state's religion, 
-time-for-change (if a party has controlled the White House for two or more terms)
-
-Sometimes also regional political variables have been adopted to highlight 
-southern and northern differences mainly (used to remove anomalies in previous elections)
-
-
-
-Many models have been developed using only such data and predicted the results within
-few percentage points.
-Forecasting models based on economic and political variables measured before the 
-start of the campaign have performed well in the past.
-
-PROBLEMS:
-- more recent economic changes are difficult to incorporate directly to economic 
-variables since data is usually not available yet
-
-
-### Individuals Indicators
-
-party, ideology, race, sex, income, education, religion, region
-
-
-
+This data is typically available before the start of the campaign in the form of
+time series indicators.
 
 
 ### Trial-Heat Polls
@@ -217,7 +197,6 @@ behaviours and incorporates the process of updating information of individuals.
 
 Moreover, can be used to track the evolution of preferences over time and states.
 
-
 PROBLEMS:
 - random sampling errors (representativeness)
 - response errors
@@ -236,12 +215,6 @@ now wide accessibility of data
 
 The bias arising from such effects usually cancels out by averaging over multiple concurrent surveys
 by different pollsters.
-
-
-
-### Web Conversations
-
-
 
 
 
@@ -289,6 +262,10 @@ on a single regression specification relying only on previous elections' data.
 Hence, historical models do not incorporate in any way the opinion about the 
 actual election that, instead, would be available by using the election poll data.
 
+Moreover, also more recent economic changes are difficult to incorporate directly 
+through economic variables since this data is usually not available and one has to
+rely on past values only.  
+
 
 ### Trial-Heat Models
 
@@ -314,6 +291,10 @@ the elections only.
 simple regression model that uses only trial-heat polls at national level and the 
 second quarter growth rate of GDP, and obtaining a forecasting performance comparable
 to that of previous methods, but at national level only.   
+
+A non-obvious benefit in using also trial-heat polls is that this data indirectly 
+incorporate the more recent economic changes, since voters are considered to 
+update their preferences based on the underlying fundamental factors.  
 
 
 ### Bayesian Models
@@ -451,6 +432,7 @@ polls from other states averaging but this can cause some bias in each state
 estimate day by day so especially for estimating trend preferences.
 
 
+### Web Conversations
 
 
 
