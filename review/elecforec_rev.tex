@@ -159,7 +159,7 @@ modelling, trial-heat, polls},
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\date{June 23, 2023}
+\date{June 25, 2023}
 \title{\bf Dynamic Forecasting of US Elections}
 \author{
 Marco Zanotti\\
@@ -179,7 +179,7 @@ The text of your abstract 200 or fewer words.
 
 \newpage
 \spacingset{1.9} % DON'T change the spacing!
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, borderline west={3pt}{0pt}{shadecolor}, frame hidden, breakable, sharp corners, boxrule=0pt, interior hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, breakable, enhanced, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, interior hidden, frame hidden]}{\end{tcolorbox}}\fi
 
 \hypertarget{sec-intro}{%
 \section{Introduction}\label{sec-intro}}
@@ -450,7 +450,8 @@ are allowed to change during the campaign, accounting for changes in
 public opinion. The core idea of the proposed Bayesian models is to use
 polls data to update historical forecasts, improving the performance of
 structural models through the incorporation of voters preferences'
-evolution.
+evolution. Moreover, Bayesian models can often be used to estimate and
+study also public opinion trends nationally or at a state-level.
 
 \citet{bro:cha:1999} proposed a three-equation model where allowing poll
 data to be assimilated in a timely manner to update an earlier
@@ -541,34 +542,41 @@ accurate results in forecasting 2008 US election.
 \hypertarget{linzer-2013}{%
 \subsection{Linzer 2013}\label{linzer-2013}}
 
-\citep{lin:2013}
+\citep{lin:2013} combined several aspects of previous methods in a more
+comprehensive Bayesian model. The quantity of interest is still the
+Democratic share of vote in each state and it is estimated unifying
+historical forecasts based on structural variables (as opposed to use
+past election results only) with state-level poll data.
 
-Dynamic Bayesian model that unifies regression-based historical
-forecasting approaches developed in political and economic sciences
-(based on fundamentals) with the poll tracking capabilities made
-feasible by the recent upsurge in state-level opinion polling.
+\[\pi_{ij} = logit^{-1}(\beta_{ij} + \delta_j)\]
 
-Since the day of election comes by, then polls become more and more
-reliable and relevant in the predictions. Older polls are useful however
-to estimate public opinion trends and variations over the campaign.
+\[\beta_{ij} | \beta_{i,j+1} \sim N(\beta_{i,j+1}, \sigma^2_{\beta})\]
 
-Include campaign effects
+\[\delta_{j} | \delta_{j+1} \sim N(\delta_{j+1}, \sigma^2_{\delta})\]
 
-quantity of interest is the democratic share of the state-level
-major-party vote does not include third-party or undecided
+\[ \beta_{iJ} \sim N(logit(h_i), s_i^2)\]
 
-estimated swing states (those whose forecasts are very close)
+\[\tau_i = 1 / s_i^2\]
 
-from final 6 months, moving forward and updating historical initial
-forecasts every 2 weeks with polls data
+\[\pi_{iJ} = logit^{-1}(\beta_{iJ}) since \delta_J = 0\]
 
-largest forecast errors in infrequently polled safe states
+The posterior probability the Democratic candidate wins in state \(i\)
+is calculated as the proportion of draws from \(\pi_{iJ}\) greater that
+0.5.
 
-All the Bayesian models can be used also to to study changes in public
-opinion and spatial relationships among states.
+Using this model, starting from final 6 months (for availability of
+fundamental variables), it is possible to continuously update forecasts
+of the final election as new polls data is available, improving the
+performance over both the baseline structural model and the literal poll
+predictions (at least in 2008 elections). However, forecast errors are
+larger in infrequently polled states and there it does not take into
+account uncertainty produced by third-party and undecided (especially
+important in close elections).
 
 \hypertarget{sec-conc}{%
 \section{Conclusion}\label{sec-conc}}
+
+\citep{riz:2023}
 
 summarize major points point out significance of results questions that
 still remain to address
@@ -596,34 +604,27 @@ to use polls from other states averaging but this can cause some bias in
 each state estimate day by day so especially for estimating trend
 preferences.
 
-\hypertarget{web-conversations}{%
-\subsection{Web Conversations}\label{web-conversations}}
-
-\hypertarget{notes}{%
-\section{Notes}\label{notes}}
-
-\citep{abr:2008} \citep{gel:kin:1993} \citep{cam:1996}
-\citep{bro:cha:1999} \citep{rig:2009} \citep{loc:gel:2010}
-\citep{lin:2013} \citep{riz:2023}
-
-{[}Consistency comparison in fitting surrogate model in the tidal power
-example.{]}\{\#fig-first width=3in\}
+Web Conversations
 
 \hypertarget{tbl-one}{}
 \begin{longtable}[]{@{}lllll@{}}
-\caption{\label{tbl-one}D-optimality values for design X under five
-different scenarios.}\tabularnewline
+\caption{\label{tbl-one}Reported forecasting errors over different
+elections.}\tabularnewline
 \toprule()
-one & two & three & four & five \\
+Election & Abramowitz & three & four & five \\
 \midrule()
 \endfirsthead
 \toprule()
-one & two & three & four & five \\
+Election & Abramowitz & three & four & five \\
 \midrule()
 \endhead
-1.23 & 3.45 & 5.00 & 1.21 & 3.41 \\
-1.23 & 3.45 & 5.00 & 1.21 & 3.42 \\
-1.23 & 3.45 & 5.00 & 1.21 & 3.43 \\
+1988 & 3.45 & 5.00 & 1.21 & 3.41 \\
+1992 & 3.45 & 5.00 & 1.21 & 3.41 \\
+1996 & 3.45 & 5.00 & 1.21 & 3.42 \\
+2000 & 3.45 & 5.00 & 1.21 & 3.43 \\
+2004 & 3.45 & 5.00 & 1.21 & 3.43 \\
+2008 & 3.45 & 5.00 & 1.21 & 3.43 \\
+2012 & 3.45 & 5.00 & 1.21 & 3.43 \\
 \bottomrule()
 \end{longtable}
 
