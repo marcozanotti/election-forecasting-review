@@ -1,11 +1,12 @@
 ---
-title: "Dynamic Forecasting of US Elections"
+title: "Structural and Trial-Heat Model Combinations to Forecast US Elections"
 format:
   jasa-pdf:
     keep-tex: true  
     journal:
       blinded: false
   jasa-html: default
+linestretch: 1.2
 date: last-modified
 author:
   - name: Marco Zanotti
@@ -21,117 +22,54 @@ keywords:
 bibliography: bibliography.bib  
 ---
 
-
+:::{add-textheight=".1in"}
 
 ## Introduction {#sec-intro}
 
+Election forecasting is a strategical task in the political area since political 
+forces spend millions of dollars in candidate's campaign and need to know when
+and where to allocate them. The national vote has always been considered
+predictable, because voters are considered to base their decisions on relatively 
+known fundamental economic and political variables. These fundamental variables 
+measure individuals interests and include economic conditions, party identification, 
+ideology etc, and all the serious forecasting methods try to predict the elections 
+using some versions of these variables.
+Nevertheless, producing election predictions timely and accurately in the election 
+year is empirically hard. Firstly, close elections are always hard to predict 
+since in these cases the best possible forecast is statistically indistinguishable 
+from 50%. Candidates may also be close on fundamental issues that voters are more 
+likely to base their decision on minor proposals that do actually separates them. 
+Secondly, state-level predictions are more difficult because of geopolitical 
+factors (there exists well-known and very important "swing" states). Moreover, 
+uneven campaigns, low-informed elections, instability of a multi-candidate races, 
+campaign events (such as verbal slips, gaffes, debates, etc) may also affect 
+voters' perceptions of the candidates' positions on fundamental issues. 
+Therefore a forecasting method based solely on some fundamental variables 
+measured before the campaign may not work well, because these so-called structural
+models have no mechanism for updating predictions once new information becomes 
+available. Nowadays this type of data is actually available, even at the 
+state-level, that is trial-heat polls by pollsters institutions. Indeed, 
+pre-election polls provide current information that can be used to correct 
+potential errors in historical forecasts, increasing precision and reducing 
+uncertainty (but have to be disregarded as literal forecasts). 
+Therefore, a more recent and useful strategy is to use polls data to update 
+baseline forecasts produced by structural models in a Bayesian manner, exploiting 
+the fact that prior information are actually available in election forecasting 
+problems. Furthermore, the Bayesian approach agrees with the well-accepted 
+"enlightened preferences" hypothesis proposed by @gel:kin:1993, stating 
+essentially that voters base their vote on fundamental variables and the function 
+of the campaign is to inform individuals about them and their appropriate weights, 
+implying that public opinion changes over the election year.
 
-
-Purpose
-Background
-Challenges
-Gaps
-Directions
-
-point out any controversy in the field
-
-
-Voters at least base their decisions on relatively known and measurable variables [gelman 1993]
-These fundamental variables measure their interests and include economic conditions, party
-identification, proximity of the voter's ideology and issue preferences to those of the candidates, etc.
-All the serious forecasting methods try to predict the election result using some versions
-of the same fundamental variables to measure economic well-being, party identification, candidate quality 
-and so forth. 
-
-### Elections may be hard to predict
-Nonostante la previsione nazionale è considerata essere prevedibile per via del 
-fatto che il risultato è considerato essere basato su variabili fondamentali che sono
-in place before the election campaign (for instance the economic situation of the US and
-forte senso di appartenenza dei cittadini americani ad uno dei due partiti)
-
-First, close elections will always be hard to predict since in these cases the best
-possible forecast will be statistically indistinguishable from 50%.
-
-In primaries, low-visibility elections, and uneven campaigns, or uninformed elections
-we would not expect forecasting based on fundamental variables meas-
-ured before the campaign to work. The fast-paced events during a primary
-campaign (such as verbal slips, gaffes, debates, particularly good photo, 
-opportunities, rhetorical victories, specific policy proposals, previous primary
-results, etc) can make an important difference because the can affect voters' perceptions
-of the candidates' positions on fundamental issues. 
-Also, primary election candidates often stand so close on fundamental issues that 
-voters are more likely to base their decision on the minor issues that do separates 
-the candidates.
-
-Moreover, the inherent instability of a multi-candidate race.
-
-Difficulty within some well-known states.
-
-The outcome of elections with uneven campaigns would also be hard to predict based on fundamental 
-variables alone. 
-
-However, in the general election campaign for the president (high information, 
-balanced campaigns) these events are ephemeral having little effect on the final 
-outcome. gelman 1993
-
-
-### "Mental" Process of Voters (gelman 1993)
-A well-accepted hypothesis of voters process during election is the so called
-enlightened preferences of @gelman1993.
-Essentially, voters based their preferences on fundamental variables and the function
-of the electoral campaign is to inform individuals about them and their appropriate 
-weights. Hence, individuals are not rational but use increasing amounts of information 
-over the campaign. 
-At the beginning of the campaign voters have low level of information and this is 
-reflected in polls answers, while the day before the election the voters have full information.
-Essentially the voters information set improves over the course of the campaign.
-
-Based on this assumption a model aiming at forecasting the presidential election
-correctly has to incorporate the process of "voters' enlightment", implying that, 
-since the values of the fundamental variables do not change, the weigths respondents 
-attach to these variables have to change during the campaign, accounting for changes
-in public opinion. 
-
-
-### Others
-presidential election decided nowadays in swing states so it makes sense to look at
-state data. Now it is possible with state polls
-
-many state are easy other diffucult
-next level of sophistication is to study trends in public opinion, so bayesian
-
-state-level pre-election poll/survey data are a new source of information for both
-forecasting and tracking evolution of voter preferences during campaign
-
-Existing historical models are designed to predict presidential candidates popular
-vote shares at a single point in time before the election (usually 2-3 months before)
-using structural fundamental variables such as...
-Prediction from these models are subject to a large amount of uncertainty, although 
-usually accurate at the national level. 
-Moreover, in the event that an early forecast is in error, these models have no mechanism 
-for updating predictions once new information becomes available. 
-
-Another problem is due to the fact that regression estimates are highly uncertain
-due to very small samples (few past obervations on elections results becaues of
-one election every 4 year)
-
-Pre-election polls provide contextual information that can be used to correct potential 
-errors in historical forecasts increasing precision and reducing uncertainty.
-
-But if used as literal forecasts, those from polls are very poor.
-
-A more recent and useful strategy is to use polls data to update historical forecasts
-in a bayesian manner (most of the time not in real time)
-
-
-IMPORTANCE OF FORECASTING: for media to explain campaign trends to the public
-politacal strategies to allocated mln of dollars in campaigns of candidates
+This article aims at illustrating some of the most relevant approaches to forecast
+(US) elections that have been developed over the years. In section 2 the most 
+widely used type of data are discussed, and in section 3 the main frameworks of 
+structural, trial-heat and Bayesian models are presented. Finally some considerations
+on some ongoing improvements are presented.
 
 
 
-
-
-## Data
+## Data {#sec-data}
 
 Forecasting elections makes use of mainly two different types data: the so-called
 fundamental indicators, that is economic or political variables, and polls data.
@@ -150,8 +88,7 @@ of some economic variables that strongly affect and anticipate election results.
 In particular, economy usually matters since an in-party presidential candidate 
 running in the context of a booming economy would win a greater share of the 
 vote than with a sluggish economy. Among the most used economic indicator there 
-are GDP, GNP, unemployment, inflation at national or state level. 
-
+are GDP, GNP, unemployment, inflation at national or state level.
 The political dimension of election is also, obviously, of high relevance and 
 it it usually measured by incumbency, votes of previous elections, presidential 
 home-state advantage, partisanship of a state (proportion of democrats in last 
@@ -159,7 +96,6 @@ legislature), president approval rating, distance between state and candidate
 ideologies, and the time-for-change variable (if a party has controlled 
 the White House for two or more terms). Sometimes also regional variables have 
 been adopted to highlight southern and northern differences.
-
 Many models have been developed using only such data and predicted the results 
 within few percentage points.
 
@@ -171,12 +107,10 @@ data before 1988 are from Gallup, then other polling organizations emerged and
 started to be used too as data sources. Moreover, initially polls on presidential 
 elections were only national, nowadays instead voters are interviewed on a state 
 basis.
-
 Literature evidence exists to conclude that survey responses are related to 
 actual voting process, meaning that polls are connected to observable political 
 behaviours and incorporate the process of updating information of individuals, 
 so that can be used to track the evolution of preferences over time and states.
-
 Election polls data suffers of some well-known problems such as sampling errors
 (representativeness), house effect (or organization bias, i.e. different 
 organizations produce results systematically supporting some party), 
@@ -186,14 +120,16 @@ Nevertheless, biases arising from such effects usually cancel out by averaging
 over multiple concurrent surveys by different pollsters, that can be safely 
 merged to study trends in major parties support but not undecided or not 
 responding [@gel:kin:1993].
-
 Availability, especially of state level polls, is less an issue nowadays since 
 many pollster agencies exist, producing numerous polls results, in particular 
 during the election year.
+Moreover, a non-obvious benefit in using also trial-heat polls is that this data 
+indirectly incorporate the more recent economic changes, since voters are 
+considered to update their preferences based on the underlying fundamental factors.
 
 
 
-## Methods & Models
+## Methods & Models {#sec-meth}
 
 Given the relevance of the topic, many methods have been proposed over the years 
 addressing the issue to produce timely and accurate forecasts of election's outcomes.
@@ -201,27 +137,24 @@ Usually, the variable of interest represents the percentage election outcome of
 one of the two major parties (Democratic or Republican), and undecided or 
 non-major party vote are often discarded or evenly divided.
 The evaluation of the models is often based on @cam:1996 accounting method in 
-which less than 1% is "accurate".  
+which less than 1% is "accurate".
  
 
 ### Structural Models
 
 Since the 80s, simple econometric models based on structural (or fundamental
 political and economic) variables gained success. One of the most successful 
-was proposed by Abramowitz in 1988 (and re-proposed in 1996 and 2008).  
-
+was proposed by Abramowitz in 1988 (and re-proposed in 1996 and 2008).
 The Time-for-Change model [@abr:2008] assumes that a presidential election is 
 essentially a referendum on the performance of the incumbent party, implying that
 voters are strongly influenced by their evaluation of the incumbent president's 
 performance. Moreover, the underlying hypothesis of this model is that individuals
 positively evaluate periodic government alternation of the two major parties. 
 $$Y_t = \beta_0 + \beta_1 GDP_{t-1} + \beta_2 Approval_t + \beta_3 TC_t + \epsilon_t$$
-
 This way, the estimate of the percentage of the incumbent party's share is based 
 on three fundamental variables only: the second quarter growth rate of GDP, the 
 approval rating of incumbent president and length of time the incumbent president's 
-party has controlled the White House (time for change factor).  
-
+party has controlled the White House (time for change factor).
 Although this model provided relatively accurate forecasts both in 6 and 2 months 
 before the Election day, as @gel:kin:1993 pointed out, one of the problems of 
 models based solely on economic and political indicators is that they are based 
@@ -230,7 +163,7 @@ Hence, historical models do not incorporate in any way the opinion about the
 actual election that, instead, would be available by using the election poll data.
 Moreover, also more recent economic changes are difficult to incorporate directly 
 through economic variables since this data is usually not available and one has to
-rely on past values only.  
+rely on past values only.
 
 
 ### Trial-Heat Models
@@ -238,12 +171,9 @@ rely on past values only.
 It is well-known that using trial-heat polls as literal forecast produce very 
 poor results, because the accuracy of election polls in forecasting the share 
 of votes depends enormously on when, during the election year, the poll is 
-conducted. It is commonplace to consider early polls as useless (same as 
-flipping a coin) and late polls as obvious [@cam:1996].  
-
-A non-obvious benefit in using also trial-heat polls is that this data indirectly 
-incorporate the more recent economic changes, since voters are considered to 
-update their preferences based on the underlying fundamental factors.  
+conducted. Indeed, it is commonplace to consider early polls as useless (same as 
+flipping a coin) and late polls as obvious [@cam:1996], however this data may be 
+exploited to improve predictions.
 
 @gel:kin:1993 proposed to incorporate actual polls information within a more 
 complex structural model considering the aggregate trial-heat two months before 
@@ -259,7 +189,7 @@ the elections only.
 @cam:1996, instead, improved the poor trial-heat literal prediction suggesting a
 simple regression model that uses only trial-heat polls at national level and the 
 second quarter growth rate of GDP, and obtaining a forecasting performance comparable
-to that of previous methods, but at national level only.   
+to that of previous methods, but at national level only.
 
 
 ### Bayesian Models
@@ -284,19 +214,16 @@ The *poll* equation, instead, is the polling model, in which voting outcomes
 depends on the percentage of survey respondents for that party (in the general 
 version the authors considered also the length of the interval between poll date 
 and election day).
-$$Y_{t}^{hist} = \beta X_t + \epsilon_t$$
-$$Y_{t}^{poll} = \alpha_0 + \alpha_1 S_t + u_t$$
-
+$$Y_{t}^{hist} = \beta X_t + \epsilon_t \;\;\;\;\;\; Y_{t}^{poll} = \alpha_0 + \alpha_1 S_t + u_t$$
 The final prediction for the election outcome is a weighted average of the 
 historical and the poll estimates, where the weights, $w^{hist}$ and $w^{poll}$, 
 are based on the proportion of the variances of the error terms of the historical 
 and polling regressions (i.e. the expectation of the normal posterior given 
 normality assumption of the prior).
 $$Y_{t} =  w^{hist} Y_{t}^{hist} + w^{poll} Y_{t}^{poll}$$
-
 Through this formulation the historical forecast is constantly updated as new 
 poll information are available. On average, from 1952-1992, this strategy 
-outperformed the forecasts produced by structural models and literal polling alone.  
+outperformed the forecasts produced by structural models and literal polling alone.
 
 However, it is also reasonable to assume that the beliefs about election's 
 outcomes are based on historical voting trends. Following this assumption, 
@@ -312,78 +239,71 @@ In their formulation, being $p_i$ the shares in a state of candidate $i$,
 the random vector of sample proportions in a state poll for $n$ respondents is 
 distributed as a Multinomial.
 $$X = (X_1, X_2, X_3, X_4) \sim MULTINOMIAL(n, p_1, p_2, p_3, p_4)$$
-
 Moreover, the proportions $p_i$ are assumed to be continuous in $[0,1]$, to satisfy 
 $\sum_{i = 1}^{4} p_i = 1$ and their joint distribution has to be a conjugate prior 
 for a Multinomial. Hence, $p$ is assumed to follow a Dirichlet
 $$p = (p_1, p_2, p_3, p_4) \sim DIRICHLET(b_1, b_2, b_3, b_4)$$
 $$p_i \sim BETA(b_i, \sum_{k = 1}^{4} b_k - b_i)$$
-
-and each $p_i$ is distributed as a Beta random variable. 
-Using Bayes' theorem it is possible to derive the posterior distribution, which 
-is again a Dirichlet with updated parameters by conjugacy.
+and each $p_i$ is distributed as a Beta random variable. Using Bayes' theorem it 
+is possible to derive the posterior distribution, which by conjugacy is again a 
+Dirichlet with updated parameters.
 $$h(p|X) \sim C \cdot f(p) \cdot l(X|p)$$
 $$h(p|X) \sim DIRICHLET(x_1 + b_1, x_2 + b_2, x_3 + b_3, x_4 + b_4)$$
 The calibration and the choice of parameters are based on historical election 
 reasoning. For instance, normal votes (i.e. votes from last elections) are used 
 for the two major parties, while for third-party is the combined third-party 
 normal vote, and the level of undecided is assumed to be 3% by previous polls' 
-trends.
-The major contribution of this model is the incorporation of the uncertainty 
+trends. The major contribution of this model is the incorporation of the uncertainty 
 given by third-party preferences and undecided, while the major drawback is the 
-absence of structural variables.  
+absence of structural variables.
 
 [@loc:gel:2010] followed a similar approach to estimate a posterior distribution
-for the Democratic vote shares in each state, combining then the estimates to 
-obtain the national results. The authors assumed normality of the prior 
-(based on historical election results), justified by the general lack of outliers 
-in state election results, and the likelihood (based on the poll data), justified 
+for the Democratic vote share in each state, combining then the estimates to 
+obtain the national results. The authors assumed normality of both the prior (based 
+on historical election results), justified by the general lack of outliers in 
+state election results, and the likelihood (based on the poll data), justified 
 by the large sample size of each poll.
-
 $$Prior: d_{s,0}|d_{s,t-1} \sim N(d_{s,t-1}, \sigma^2_{d_{s,0}|d_{s,t-1}})$$
-
 $$Likelihood: d_{s,t}|d_{s,0} \sim N(d_{s,0}, \frac{p_{s,0}(1-p_{s,0})}{n_{s,t}} \sigma^2_{d_{s,t}|d_{s,0}})$$
-
 The prior gives a distribution for the state share of vote in the current election
 given each state's share of vote in the previous election, while the likelihood 
 gives the distribution of a state poll, conducted $t$ months before the election 
 given the state's share of vote in the current election. Also in this case, the
 parameters are estimated using historical election results (for the prior) and
-historical poll data (for the likelihood).
-The posterior distribution is then obtained by combining the prior with the 
-likelihood, giving a normal-normal mixture model which allows to continuously 
-update each state's share of vote as new polls are available.
+historical poll data (for the likelihood). The posterior distribution is then 
+obtained by combining the prior with the likelihood, giving a normal-normal 
+mixture model which allows to continuously update each state's share of vote as 
+new polls are available.
 Although this approach does not consider directly any fundamental variable, it 
 produced very accurate results in forecasting 2008 US election.
 
-[@lin:2013] combined several aspects of previous methods in a more comprehensive
-Bayesian model. The quantity of interest is still the Democratic share of vote in
-each state and it is estimated unifying historical forecasts based on structural
+[@lin:2013] combined several aspects of previous methods in a more complex Bayesian 
+model. The quantity of interest is still the Democratic share of vote in each 
+state and it is estimated unifying historical forecasts based on structural
 variables (as opposed to use past election results only) with state-level poll data.
-
-
-
+In particular, the proportion of voters in a certain state $i$ on specific day $j$
+(for $j = 1,...,J$) is based on two components
 $$\pi_{ij} = logit^{-1}(\beta_{ij} + \delta_j)$$
-
-$$\beta_{ij} | \beta_{i,j+1} \sim N(\beta_{i,j+1}, \sigma^2_{\beta})$$
-
-$$\delta_{j} | \delta_{j+1} \sim N(\delta_{j+1}, \sigma^2_{\delta})$$
-
-
-
-$$ \beta_{iJ} \sim N(logit(h_i), s_i^2)$$
-
-$$\tau_i = 1 / s_i^2$$
-
-$$\pi_{iJ} = logit^{-1}(\beta_{iJ}) since \delta_J = 0$$
-
-
-
-The posterior probability the Democratic candidate wins in state $i$ is 
-calculated as the proportion of draws from $\pi_{iJ}$ greater that 0.5.
-
-
-
+where $\beta_{ij}$ represents the historical voting preferences in state $i$, 
+while $\delta_j$ is a national effect capturing variations in $\beta_{ij}$ due to
+campaign and other election events. Moreover, reverse-random walk Normal priors 
+are assigned to both $\beta_{ij}$ and $\delta_j$
+$$\beta_{ij} | \beta_{i,j+1} \sim N(\beta_{i,j+1}, s^2_{\beta}) \;\;\;\;\;\; \delta_{j} | \delta_{j+1} \sim N(\delta_{j+1}, s^2_{\delta})$$
+with estimated variances that measures the rates of daily change and follows 
+Uniform priors.
+The historical forecasts $h_i$, instead, are obtained using the @abr:2008 
+Time-for-Change model and are incorporated through an Normal prior over $\beta_{iJ}$ 
+$$\beta_{iJ} \sim N(logit(h_i), \sigma_i^2)$$
+where $\tau_i = 1 / \sigma_i^2$ is the prior precision indicating the level of 
+certainty on the historical forecasts, that is higher $\tau_i$, higher weight to 
+historical prediction over new polling data.
+Therefore, the Election day forecast for each state is a combination of the most 
+recent polls and the structural forecasts and the posterior probability the 
+Democratic candidate wins in state $i$ is calculated as the proportion of draws 
+from $\pi_{iJ}$ greater that 0.5. In particular, when the election is soon estimates
+of $\pi_{iJ}$ are based primarily on poll data, whereas if the election is farther
+ahead are driven by the historical prior (and if the precision is high, then 
+$\beta_{ij}$ converges to $logit(h_i)$ and $\pi_{iJ}$ converges to $h_i$).
 Using this model, starting from final 6 months of the election year (for 
 availability of fundamental variables), it is possible to continuously update 
 the forecasts of the final election as new polls data is available, improving 
@@ -392,39 +312,23 @@ predictions (at least in 2008 elections). However, forecast errors are larger
 in infrequently polled states and it is not taken into account the uncertainty 
 produced by third-party and undecided voters (especially important in close 
 elections).
+<!-- the starting point of the reverse random walk proces is  -->
+<!-- $\pi_{iJ} = logit^{-1}(\beta_{iJ}) since \delta_J = 0$ -->
 
+<!-- https://github.com/pkremp/polls -->
+<!-- https://pkremp.github.io/report.html -->
 
 
 ## Conclusion {#sec-conc}
 
-[@riz:2023]
-
-summarize major points
-point out significance of results
-questions that still remain to address
-
-web data + ensembling
-
-
-By treating forecasting as a Bayesian updating problem, we are able to produce 
-continuously revised forecasts as new poll data are released in the course of the 
-campaign. Allowing to account for the process of voters and incorporating the
-changing weights assigned to the fundamental variables.
-
-Forecasting using both historical fundamental variables and poll data outperform
-those based on fundamentals or polls alone (even at the state level)
-
-Forecasts are usually consistently accurate in the 2 months before the election.
-
-best improvements of Bayesian approaches is from 1 to 2 months before election day
-so still too late
-
-problems in states polled few and in days with no polls the approach i to use 
-polls from other states averaging but this can cause some bias in each state 
-estimate day by day so especially for estimating trend preferences.
-
-Web Conversations
-
+By treating forecasting as a Bayesian problem, it is possible to produce continuously 
+revised forecasts as new poll data are released during the election year. This
+allows to account for changes in public opinion, updating the weights voters 
+assign to the fundamental variables and possibly improving the predictions.
+However, comparing the performances of the different models is difficult because 
+they are often tested against different elections and, usually, more recent 
+approaches cannot be tested in past scenarios since state-level polls were very 
+infrequent.
 
 | Election | Abramowitz | three | four | five |
 |------|------|-------|------|------|
@@ -438,8 +342,19 @@ Web Conversations
 
 : Reported forecasting errors over different elections. {#tbl-one}
 
+In general, forecasts are accurate within 2 months before the election day and 
+forecasting using both structural variables and poll data usually outperform
+those based on fundamentals or polls alone, both at the national and the state levels.
+The best improvements in using polls data are from 1 to 2 months before the 
+election which is not really an early forecast. This is mainly due to the fact 
+that early polls have very little relationship with the final outcome, meaning
+that it is still difficult to produce timely and accurate forecasts relying on 
+this type of data. Furthermore, problems arise in forecasting accuracy and 
+uncertainty for states that are polled few and in those days with no polls at all.
+To solve this lack of data issues, it is possible to use another source of 
+spontaneous public opinions, that is web data [@riz:2023]. Social networks, blogs 
+and forums contain a huge amount of data related to individuals' preferences that 
+can be exploited during the election period to estimate the share of vote for all
+the candidates over all the election year.
 
-:::{add-textheight=".5in"}
 :::
-
-
