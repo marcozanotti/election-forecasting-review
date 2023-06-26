@@ -13,7 +13,18 @@ author:
     affiliations:
       - name: University of Milano Bicocca
 abstract: |
-  The text of your abstract 200 or fewer words.
+  Forecasting presidential elections is a well-studied topic given its relevance
+  within the political field. Producing timemy and accurately prediction of the 
+  final election outcome is still not an easy task. Many different methods have 
+  been developed over the years, trying to take into account different sources of 
+  data available, from fundamental economic and political variables to state-level 
+  poll data. These methods evolved from simple structural models based on historical
+  data to more complex Bayesian approaches that do try to exploit all the available
+  information. Although no consensus has been reached on what is the best possible 
+  solution, it is clear that by treating forecasting as a Bayesian problem, it 
+  is possible to easily incorporate new poll data, accounting for changes in 
+  public opinion and possibly improving the predictions over structural or polling
+  models alone.
 keywords:
   - election forecast
   - bayesian modelling
@@ -356,4 +367,5 @@ To solve this lack of data issues, it is possible to use another source of
 spontaneous public opinions, that is web data [@riz:2023]. Social networks, blogs 
 and forums contain a huge amount of data related to individuals' preferences that 
 can be exploited during the election period to estimate the share of vote for all
-the candidates over all the election year.
+the candidates over all the states (thanks to geo-location feature of this data) 
+during the election year. 
