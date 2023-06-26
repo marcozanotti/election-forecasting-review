@@ -193,7 +193,7 @@ predictions over structural or polling models alone.
 
 \newpage
 \spacingset{1.9} % DON'T change the spacing!
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, breakable, enhanced, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, interior hidden, frame hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, sharp corners, enhanced, borderline west={3pt}{0pt}{shadecolor}, breakable, frame hidden, boxrule=0pt]}{\end{tcolorbox}}\fi
 
 \setstretch{1.2}
 \hypertarget{sec-intro}{%
@@ -602,7 +602,14 @@ another source of spontaneous public opinions, that is web data
 amount of data related to individuals' preferences that can be exploited
 during the election period to estimate the share of vote for all the
 candidates over all the states (thanks to geo-location feature of this
-data) during the election year.
+data) during the election year. Finally, none of these methods consider
+the fact that vote intentions may be correlated across states. For
+example, if a candidate is performing bad in a state, this might
+indicate that he will also underperform in other (swing) states
+(possibly because there were hidden voters for the opposing candidate
+that polls missed in that state and may equally have been missed in
+others). This form of state dependency may exist and can be used to
+improve early accuracy of the model.
 
 
   \bibliography{bibliography.bib}
