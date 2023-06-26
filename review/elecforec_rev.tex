@@ -160,7 +160,7 @@ modelling, trial-heat, polls},
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\date{June 25, 2023}
+\date{June 26, 2023}
 \title{\bf Structural and Trial-Heat Model Combinations to Forecast US
 Elections}
 \author{
@@ -181,11 +181,9 @@ The text of your abstract 200 or fewer words.
 
 \newpage
 \spacingset{1.9} % DON'T change the spacing!
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, boxrule=0pt, interior hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, frame hidden, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, interior hidden, sharp corners, breakable, enhanced, frame hidden]}{\end{tcolorbox}}\fi
 
 \setstretch{1.2}
-\addtolength{\textheight}{.1in}%
-
 \hypertarget{sec-intro}{%
 \section{Introduction}\label{sec-intro}}
 
@@ -505,29 +503,74 @@ election year. This allows to account for changes in public opinion,
 updating the weights voters assign to the fundamental variables and
 possibly improving the predictions. However, comparing the performances
 of the different models is difficult because they are often tested
-against different elections and, usually, more recent approaches cannot
-be tested in past scenarios since state-level polls were very
-infrequent.
+against different elections, over different horizons, with different
+purposes (national or state levels). Moreover, more recent approaches
+cannot be tested in past scenarios since state-level polls were very
+infrequent. Uncertainty in the forecasts need also to be taken into
+account to effectively compare the performances of all the models.
 
 \hypertarget{tbl-one}{}
-\begin{longtable}[]{@{}lllll@{}}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1091}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1091}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1273}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1091}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1091}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1091}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1091}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1091}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1091}}@{}}
 \caption{\label{tbl-one}Reported forecasting errors over different
 elections.}\tabularnewline
 \toprule()
-Election & Abramowitz & three & four & five \\
+\begin{minipage}[b]{\linewidth}\raggedright
+Election
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Abram.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Gelman
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Campbell
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Brown
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Rigdon
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Lock
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Linzer
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} \\
 \midrule()
 \endfirsthead
 \toprule()
-Election & Abramowitz & three & four & five \\
+\begin{minipage}[b]{\linewidth}\raggedright
+Election
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Abram.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Gelman
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Campbell
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Brown
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Rigdon
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Lock
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Linzer
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} \\
 \midrule()
 \endhead
-1988 & 3.45 & 5.00 & 1.21 & 3.41 \\
-1992 & 3.45 & 5.00 & 1.21 & 3.41 \\
-1996 & 3.45 & 5.00 & 1.21 & 3.42 \\
-2000 & 3.45 & 5.00 & 1.21 & 3.43 \\
-2004 & 3.45 & 5.00 & 1.21 & 3.43 \\
-2008 & 3.45 & 5.00 & 1.21 & 3.43 \\
-2012 & 3.45 & 5.00 & 1.21 & 3.43 \\
+1988 & - & - & 0.7\% & - & - & - & - & \\
+1992 & 0,9\% & 0.3\% & 0.1\% & - & - & - & - & \\
+1996 & 0.0\% & - & - & 0.4\% & - & - & - & \\
+2000 & 1.1\% & - & - & - & - & - & - & \\
+2004 & 2.5\% & - & - & - & - & - & - & \\
+2008 & 0.6\% & - & - & - & - & 0.1\% & 0.3\% & \\
+2012 & - & - & - & - & - & - & - & \\
 \bottomrule()
 \end{longtable}
 
@@ -547,8 +590,6 @@ another source of spontaneous public opinions, that is web data
 amount of data related to individuals' preferences that can be exploited
 during the election period to estimate the share of vote for all the
 candidates over all the election year.
-
-\addtolength{\textheight}{-.1in}%
 
 
   \bibliography{bibliography.bib}

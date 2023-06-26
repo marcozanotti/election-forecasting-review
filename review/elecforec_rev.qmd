@@ -22,7 +22,6 @@ keywords:
 bibliography: bibliography.bib  
 ---
 
-:::{add-textheight=".1in"}
 
 ## Introduction {#sec-intro}
 
@@ -326,19 +325,21 @@ revised forecasts as new poll data are released during the election year. This
 allows to account for changes in public opinion, updating the weights voters 
 assign to the fundamental variables and possibly improving the predictions.
 However, comparing the performances of the different models is difficult because 
-they are often tested against different elections and, usually, more recent 
-approaches cannot be tested in past scenarios since state-level polls were very 
-infrequent.
+they are often tested against different elections, over different horizons, with 
+different purposes (national or state levels). Moreover, more recent approaches 
+cannot be tested in past scenarios since state-level polls were very infrequent. 
+Uncertainty in the forecasts need also to be taken into account to effectively 
+compare the performances of all the models.
 
-| Election | Abramowitz | three | four | five |
-|------|------|-------|------|------|
-| 1988 | 3.45 | 5.00  | 1.21 | 3.41 |
-| 1992 | 3.45 | 5.00  | 1.21 | 3.41 |
-| 1996 | 3.45 | 5.00  | 1.21 | 3.42 |
-| 2000 | 3.45 | 5.00  | 1.21 | 3.43 |
-| 2004 | 3.45 | 5.00  | 1.21 | 3.43 |
-| 2008 | 3.45 | 5.00  | 1.21 | 3.43 |
-| 2012 | 3.45 | 5.00  | 1.21 | 3.43 |
+| Election | Abram. | Gelman | Campbell | Brown | Rigdon | Lock | Linzer |
+|------|------|-------|------|------|------|------|------|------|
+| 1988 | - | - | 0.7% | - | - | - | - |
+| 1992 | 0,9% | 0.3% | 0.1% | - | - | - | - |
+| 1996 | 0.0% | - | - | 0.4% | - | - | - |
+| 2000 | 1.1% | - | - | - | - | - | - |
+| 2004 | 2.5% | - | - | - | - | - | - |
+| 2008 | 0.6% | - | - | - | - | 0.1% | 0.3% |
+| 2012 | - | - | - | - | - | - | - |
 
 : Reported forecasting errors over different elections. {#tbl-one}
 
@@ -356,5 +357,3 @@ spontaneous public opinions, that is web data [@riz:2023]. Social networks, blog
 and forums contain a huge amount of data related to individuals' preferences that 
 can be exploited during the election period to estimate the share of vote for all
 the candidates over all the election year.
-
-:::
