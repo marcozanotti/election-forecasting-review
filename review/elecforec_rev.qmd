@@ -291,22 +291,40 @@ produced very accurate results in forecasting 2008 US election.
 model. The quantity of interest is still the Democratic share of vote in each 
 state and it is estimated unifying historical forecasts based on structural
 variables (as opposed to use past election results only) with state-level poll data.
-In particular, the proportion of voters in a certain state $i$ on specific day $j$
-(for $j = 1,...,J$) is based on two components
+The model has a backward component, which aggregates polls to derive estimate 
+voting preferences, and a forward component, which predicts how these voting 
+preferences evolve over time. In each state, voting preferences follow a reverse 
+random walk: starting on election day, the estimated intentions evolve randomly
+going back in time.
+For the $k$ survey, the number of respondents for the Democratic party is drawn
+from a Binomial distribution 
+$$Democratic \; Votes^k \sim Binomial(n^k, \pi_{ij}^k)$$
+with poll sample size $n^k$ and proportion of voters in a certain state $i$ 
+on specific day $j$ (for $j = 1,...,J$) $\pi_{ij}$. Hence, the quantity of 
+interest is the share of voting preferences which is modeled as
 $$\pi_{ij} = logit^{-1}(\beta_{ij} + \delta_j)$$
-where $\beta_{ij}$ represents the historical voting preferences in state $i$, 
+$\beta_{ij}$ represents the historical voting preferences in state $i$, 
 while $\delta_j$ is a national effect capturing variations in $\beta_{ij}$ due to
-campaign and other election events. Moreover, reverse-random walk Normal priors 
-are assigned to both $\beta_{ij}$ and $\delta_j$
-$$\beta_{ij} | \beta_{i,j+1} \sim N(\beta_{i,j+1}, s^2_{\beta}) \;\;\;\;\;\; \delta_{j} | \delta_{j+1} \sim N(\delta_{j+1}, s^2_{\delta})$$
-with estimated variances that measures the rates of daily change and follows 
+campaign and other election events. This model simply decomposes the log-odds of 
+Democratic shares into a national and a state-specific component. Moreover, 
+$\delta_j$ is set to zero on the day of the last available poll $j_{last}$, 
+implying that predicting share of votes from after that day and until the election 
+day is based on $\beta_{ij}$ only.
+In order to smooth voting preferences by state and obtain an estimate for those 
+days when no polls are available, two reverse random walk normal priors for 
+$\beta$ and $\delta$ are used
+$$\beta_{i,j-1} \sim N(\beta_{i,j}, s^2_{\beta}) \;\;\;\;\;\; \delta_{j-1} \sim N(\delta_j, s^2_{\delta})$$
+with estimated variances that measures the rates of daily change and follow 
 Uniform priors.
 The historical forecasts $h_i$, instead, are obtained using the @abr:2008 
-Time-for-Change model and are incorporated through an Normal prior over $\beta_{iJ}$ 
+Time-for-Change model and are incorporated through an Normal prior for the
+final outcome $\beta_{iJ}$ 
 $$\beta_{iJ} \sim N(logit(h_i), \sigma_i^2)$$
 where $\tau_i = 1 / \sigma_i^2$ is the prior precision indicating the level of 
 certainty on the historical forecasts, that is higher $\tau_i$, higher weight to 
-historical prediction over new polling data.
+historical prediction over new polling data. Thus, from election day to the day 
+of the latest available poll $j_{last}$, voting preferences by state start at 
+$\beta{iJ}$ (since $\delta_J = 0$) and follow a reverse random walk.
 Therefore, the Election day forecast for each state is a combination of the most 
 recent polls and the structural forecasts and the posterior probability the 
 Democratic candidate wins in state $i$ is calculated as the proportion of draws 
@@ -322,8 +340,6 @@ predictions (at least in 2008 elections). However, forecast errors are larger
 in infrequently polled states and it is not taken into account the uncertainty 
 produced by third-party and undecided voters (especially important in close 
 elections).
-<!-- the starting point of the reverse random walk proces is  -->
-<!-- $\pi_{iJ} = logit^{-1}(\beta_{iJ}) since \delta_J = 0$ -->
 
 
 
@@ -348,7 +364,6 @@ compare the performances of all the models.
 | 2000 | 1.1% | - | - | - | - | - | - |
 | 2004 | 2.5% | - | - | - | - | - | - |
 | 2008 | 0.6% | - | - | - | - | 0.1% | 0.3% |
-| 2012 | - | - | - | - | - | - | - |
 
 : Reported forecasting errors over different elections. {#tbl-one}
 
