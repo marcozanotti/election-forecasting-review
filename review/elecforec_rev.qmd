@@ -75,7 +75,7 @@ This article aims at illustrating some of the most relevant approaches to foreca
 (US) elections that have been developed over the years. In section 2 the most 
 widely used type of data are discussed, and in section 3 the main frameworks of 
 structural, trial-heat and Bayesian models are presented. Finally some considerations
-on some ongoing improvements are presented.
+on some ongoing improvements are introduced.
 
 
 
@@ -273,9 +273,9 @@ obtain the national results. The authors assumed normality of both the prior (ba
 on historical election results), justified by the general lack of outliers in 
 state election results, and the likelihood (based on the poll data), justified 
 by the large sample size of each poll.
-$$Prior: d_{s,0}|d_{s,t-1} \sim N(d_{s,t-1}, \sigma^2_{d_{s,0}|d_{s,t-1}})$$
-$$Likelihood: d_{s,t}|d_{s,0} \sim N(d_{s,0}, \frac{p_{s,0}(1-p_{s,0})}{n_{s,t}} \sigma^2_{d_{s,t}|d_{s,0}})$$
-The prior gives a distribution for the state share of vote in the current election
+$$d_{i,0}|d_{i,t-1} \sim N(d_{i,t-1}, \sigma^2_{d_{i,0}|d_{i,t-1}})$$
+$$d_{i,t}|d_{i,0} \sim N(d_{i,0}, \frac{p_{i,0}(1-p_{i,0})}{n_{i,t}} \sigma^2_{d_{i,t}|d_{i,0}})$$
+The prior gives a distribution for the state $i$ share of vote in the current election
 given each state's share of vote in the previous election, while the likelihood 
 gives the distribution of a state poll, conducted $t$ months before the election 
 given the state's share of vote in the current election. Also in this case, the

@@ -160,7 +160,7 @@ modelling, trial-heat, polls},
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\date{July 1, 2023}
+\date{July 2, 2023}
 \title{\bf Structural and Trial-Heat Model Combinations to Forecast US
 Elections}
 \author{
@@ -193,7 +193,7 @@ predictions over structural or polling models alone.
 
 \newpage
 \spacingset{1.9} % DON'T change the spacing!
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, enhanced, frame hidden, borderline west={3pt}{0pt}{shadecolor}, sharp corners, boxrule=0pt, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, boxrule=0pt, enhanced, breakable, sharp corners, frame hidden, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
 
 \setstretch{1.2}
 \hypertarget{sec-intro}{%
@@ -243,7 +243,7 @@ to forecast (US) elections that have been developed over the years. In
 section 2 the most widely used type of data are discussed, and in
 section 3 the main frameworks of structural, trial-heat and Bayesian
 models are presented. Finally some considerations on some ongoing
-improvements are presented.
+improvements are introduced.
 
 \hypertarget{sec-data}{%
 \section{Data}\label{sec-data}}
@@ -453,9 +453,9 @@ normality of both the prior (based on historical election results),
 justified by the general lack of outliers in state election results, and
 the likelihood (based on the poll data), justified by the large sample
 size of each poll.
-\[Prior: d_{s,0}|d_{s,t-1} \sim N(d_{s,t-1}, \sigma^2_{d_{s,0}|d_{s,t-1}})\]
-\[Likelihood: d_{s,t}|d_{s,0} \sim N(d_{s,0}, \frac{p_{s,0}(1-p_{s,0})}{n_{s,t}} \sigma^2_{d_{s,t}|d_{s,0}})\]
-The prior gives a distribution for the state share of vote in the
+\[d_{i,0}|d_{i,t-1} \sim N(d_{i,t-1}, \sigma^2_{d_{i,0}|d_{i,t-1}})\]
+\[d_{i,t}|d_{i,0} \sim N(d_{i,0}, \frac{p_{i,0}(1-p_{i,0})}{n_{i,t}} \sigma^2_{d_{i,t}|d_{i,0}})\]
+The prior gives a distribution for the state \(i\) share of vote in the
 current election given each state's share of vote in the previous
 election, while the likelihood gives the distribution of a state poll,
 conducted \(t\) months before the election given the state's share of
