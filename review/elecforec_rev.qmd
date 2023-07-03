@@ -81,7 +81,7 @@ on some ongoing improvements are introduced.
 
 ## Data {#sec-data}
 
-Forecasting elections makes use of mainly two different types data: the so-called
+Forecasting elections makes use of mainly two different types of data: the so-called
 fundamental indicators, that is economic or political variables, and polls data.
 The former are historical time series covering various aspects of US economy and 
 politics, and are usually available within 6 months of the Election day. 
@@ -100,7 +100,7 @@ running in the context of a booming economy would win a greater share of the
 vote than with a sluggish economy. Among the most used economic indicator there 
 are GDP, GNP, unemployment, inflation at national or state level.
 The political dimension of election is also, obviously, of high relevance and 
-it it usually measured by incumbency, votes of previous elections, presidential 
+it is usually measured by incumbency, votes of previous elections, presidential 
 home-state advantage, partisanship of a state (proportion of democrats in last 
 legislature), president approval rating, distance between state and candidate 
 ideologies, and the time-for-change variable (if a party has controlled 
@@ -346,7 +346,7 @@ elections).
 ## Conclusion {#sec-conc}
 
 By treating forecasting as a Bayesian problem, it is possible to produce continuously 
-revised forecasts as new poll data are released during the election year. This
+revised forecasts as new poll data is released during the election year. This
 allows to account for changes in public opinion, updating the weights voters 
 assign to the fundamental variables and possibly improving the predictions.
 However, comparing the performances of the different models is difficult because 

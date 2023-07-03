@@ -160,7 +160,7 @@ modelling, trial-heat, polls},
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\date{July 2, 2023}
+\date{July 3, 2023}
 \title{\bf Structural and Trial-Heat Model Combinations to Forecast US
 Elections}
 \author{
@@ -193,7 +193,7 @@ predictions over structural or polling models alone.
 
 \newpage
 \spacingset{1.9} % DON'T change the spacing!
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, boxrule=0pt, enhanced, breakable, sharp corners, frame hidden, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, frame hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, boxrule=0pt, sharp corners, breakable]}{\end{tcolorbox}}\fi
 
 \setstretch{1.2}
 \hypertarget{sec-intro}{%
@@ -248,8 +248,8 @@ improvements are introduced.
 \hypertarget{sec-data}{%
 \section{Data}\label{sec-data}}
 
-Forecasting elections makes use of mainly two different types data: the
-so-called fundamental indicators, that is economic or political
+Forecasting elections makes use of mainly two different types of data:
+the so-called fundamental indicators, that is economic or political
 variables, and polls data. The former are historical time series
 covering various aspects of US economy and politics, and are usually
 available within 6 months of the Election day. The latter are the
@@ -268,7 +268,7 @@ since an in-party presidential candidate running in the context of a
 booming economy would win a greater share of the vote than with a
 sluggish economy. Among the most used economic indicator there are GDP,
 GNP, unemployment, inflation at national or state level. The political
-dimension of election is also, obviously, of high relevance and it it
+dimension of election is also, obviously, of high relevance and it is
 usually measured by incumbency, votes of previous elections,
 presidential home-state advantage, partisanship of a state (proportion
 of democrats in last legislature), president approval rating, distance
@@ -527,7 +527,7 @@ undecided voters (especially important in close elections).
 \section{Conclusion}\label{sec-conc}}
 
 By treating forecasting as a Bayesian problem, it is possible to produce
-continuously revised forecasts as new poll data are released during the
+continuously revised forecasts as new poll data is released during the
 election year. This allows to account for changes in public opinion,
 updating the weights voters assign to the fundamental variables and
 possibly improving the predictions. However, comparing the performances
