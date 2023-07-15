@@ -142,22 +142,22 @@ voting trends
 \  
 - Considers the proportions of **third-party candidates and undecided**  
 \  
-- A **Dirichlet-Multinomial** conjugate model with a prior based on past election 
+- A **Dirichlet-Multinomial** model with a conjugate prior based on past election 
 results and a likelihood based on current poll data to estimate each candidate's 
 probability of winning a state  
 
 
 ## Bayesian Models - Rigdon et al.
 
-$$X = (X_1, X_2, X_3, X_4) \sim MULTINOMIAL(n, p_1, p_2, p_3, p_4)$$
-$$p = (p_1, p_2, p_3, p_4) \sim DIRICHLET(b_1, b_2, b_3, b_4)$$
+$$X = (X_1, X_2, X_3, X_4) \sim Multinomial(n, p_1, p_2, p_3, p_4)$$
+$$p = (p_1, p_2, p_3, p_4) \sim Dirichlet(b_1, b_2, b_3, b_4)$$
 
 where $X_i$ are the sample proportions in a state poll and $p_i$ are the shares 
 in a state of candidate $i$
 <!-- the proportions $p_i$ are assumed to be continuous in $[0,1]$, to satisfy  -->
 <!-- $\sum_{i = 1}^{4} p_i = 1$ and their joint distribution has to be a conjugate prior  -->
 <!-- for a Multinomial. -->
-$$P(p|X) \sim DIRICHLET(x_1 + b_1, x_2 + b_2, x_3 + b_3, x_4 + b_4)$$
+$$P(p|X) \sim Dirichlet(x_1 + b_1, x_2 + b_2, x_3 + b_3, x_4 + b_4)$$
 \    
 The choice of parameters is based on historical election reasoning.  
 \    
