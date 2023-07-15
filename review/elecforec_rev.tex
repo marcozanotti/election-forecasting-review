@@ -193,7 +193,7 @@ predictions over structural or polling models alone.
 
 \newpage
 \spacingset{1.9} % DON'T change the spacing!
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, enhanced, interior hidden, breakable, borderline west={3pt}{0pt}{shadecolor}, sharp corners, frame hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, interior hidden, breakable, boxrule=0pt, enhanced, frame hidden, sharp corners]}{\end{tcolorbox}}\fi
 
 \setstretch{1.2}
 \hypertarget{sec-intro}{%
@@ -476,13 +476,14 @@ is modeled as \[\pi_{ij} = logit^{-1}(\beta_{ij} + \delta_j)\]
 \(\beta_{ij}\) represents the historical voting preferences in state
 \(i\), while \(\delta_j\) is a national effect capturing variations in
 \(\beta_{ij}\) due to campaign and other election events. This model
-simply decomposes the log-odds of Democratic shares into a national and
-a state-specific component. Moreover, \(\delta_j\) is set to zero on the
-day of the last available poll \(j_{last}\), implying that predicting
-share of votes from after that day and until the election day is based
-on \(\beta_{ij}\) only. In order to smooth voting preferences by state
-and obtain an estimate for those days when no polls are available, two
-reverse random walk normal priors for \(\beta\) and \(\delta\) are used
+simply decomposes the log-odds of Democratic shares into a
+state-specific and a national components. Moreover, \(\delta_j\) is set
+to zero on the day of the last available poll \(j_{last}\), implying
+that predicting share of votes from after that day and until the
+election day is based on \(\beta_{ij}\) only. In order to smooth voting
+preferences by state and obtain an estimate for those days when no polls
+are available, two reverse random walk normal priors for \(\beta\) and
+\(\delta\) are used
 \[\beta_{i,j-1} \sim N(\beta_{i,j}, s^2_{\beta}) \;\;\;\;\;\; \delta_{j-1} \sim N(\delta_j, s^2_{\delta})\]
 with estimated variances that measures the rates of daily change and
 follow Uniform priors. The historical forecasts \(h_i\), instead, are
@@ -493,7 +494,7 @@ incorporated through a Normal prior for the final outcome \(\beta_{iJ}\)
 of certainty on the historical forecasts, that is higher \(\tau_i\),
 higher weight to historical prediction over new polling data. Thus, from
 election day to the day of the latest available poll \(j_{last}\),
-voting preferences by state start at \(\beta{iJ}\) (since
+voting preferences by state start at \(\beta_{iJ}\) (since
 \(\delta_J = 0\)) and follow a reverse random walk. Therefore, the
 Election day forecast for each state is a combination of the most recent
 polls and the structural forecasts and the posterior probability the
