@@ -7,7 +7,7 @@ format:
       blinded: false
   jasa-html: default
 linestretch: 1.2
-date: last-modified
+date: 2023-07-21
 author:
   - name: Marco Zanotti
     affiliations:
