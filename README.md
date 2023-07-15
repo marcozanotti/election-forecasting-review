@@ -10,3 +10,5 @@ Article](https://marcozanotti.github.io/election-forecasting-review/review/elecf
 
 [Dynamic Forecasting of US Elections -
 Presentation](https://marcozanotti.github.io/election-forecasting-review/presentation/elecforec_pres.pdf)
+
+[References](https://marcozanotti.github.io/election-forecasting-review/material)
