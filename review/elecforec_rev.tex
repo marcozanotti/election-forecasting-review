@@ -193,7 +193,7 @@ predictions over structural or polling models alone.
 
 \newpage
 \spacingset{1.9} % DON'T change the spacing!
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, interior hidden, breakable, boxrule=0pt, enhanced, frame hidden, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, boxrule=0pt, enhanced, sharp corners, interior hidden, borderline west={3pt}{0pt}{shadecolor}, breakable]}{\end{tcolorbox}}\fi
 
 \setstretch{1.2}
 \hypertarget{sec-intro}{%
@@ -331,7 +331,7 @@ of the incumbent party, implying that voters are strongly influenced by
 their evaluation of the incumbent president's performance. Moreover, the
 underlying hypothesis of this model is that individuals positively
 evaluate periodic government alternation of the two major parties.
-\[Y_t = \beta_0 + \beta_1 GDP_{t-1} + \beta_2 Approval_t + \beta_3 TC_t + \epsilon_t\]
+\[\pi_t = \beta_0 + \beta_1 GDP_{t-1} + \beta_2 Approval_t + \beta_3 TC_t + \epsilon_t\]
 This way, the estimate of the percentage of the incumbent party's share
 is based on three fundamental variables only: the second quarter growth
 rate of GDP, the approval rating of incumbent president and length of
@@ -397,16 +397,16 @@ equation, instead, is the polling model, in which voting outcomes
 depends on the percentage of survey respondents for that party (in the
 general version the authors considered also the length of the interval
 between poll date and election day).
-\[Y_{t}^{hist} = \beta X_t + \epsilon_t \;\;\;\;\;\; Y_{t}^{poll} = \alpha_0 + \alpha_1 S_t + u_t\]
+\[\pi_{t}^{hist} = \beta X_t + \epsilon_t \;\;\;\;\;\; \pi_{t}^{poll} = \alpha_0 + \alpha_1 S_t + u_t\]
 The final prediction for the election outcome is a weighted average of
 the historical and the poll estimates, where the weights, \(w^{hist}\)
 and \(w^{poll}\), are based on the proportion of the variances of the
 error terms of the two regressions.
-\[Y_{t} =  w^{hist} Y_{t}^{hist} + w^{poll} Y_{t}^{poll}\] Through this
-formulation the historical forecast is constantly updated as new poll
-information are available. On average, from 1952-1992, this strategy
-outperformed the forecasts produced by structural models and literal
-polling alone.
+\[\pi_{t} =  w^{hist} \pi_{t}^{hist} + w^{poll} \pi_{t}^{poll}\] Through
+this formulation the historical forecast is constantly updated as new
+poll information are available. On average, from 1952-1992, this
+strategy outperformed the forecasts produced by structural models and
+literal polling alone.
 
 However, it is also reasonable to assume that the beliefs about
 election's outcomes are based on historical voting trends. Following

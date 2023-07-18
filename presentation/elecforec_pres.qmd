@@ -93,14 +93,14 @@ improving the performance of structural models through the incorporation of
 voters preferences’ evolution  
 
 The variable of interest is usually the percentage election outcome of one of 
-the two major parties  
+the two major parties ($\pi_t$)  
 
 
 ## Structural Models
 
 The **Time-for-change model** is one of the most successful and was proposed by 
-Abramowitz in 1988 (and again in 1996 and 2008)  
-$$Y_t = \beta_0 + \beta_1 GDP_{t-1} + \beta_2 Approval_t + \beta_3 TC_t$$  
+*Abramowitz* in 1988 (and again in 1996 and 2008)  
+$$\pi_t = \beta_0 + \beta_1 GDP_{t-1} + \beta_2 Approval_t + \beta_3 TC_t$$  
 
 It assumes that voters positively evaluate periodic government alternation of the
 two major parties  
@@ -114,18 +114,31 @@ the current election
 Using trial-heat polls as **literal forecast** produce very poor results, because the 
 accuracy of election polls depends enormously on when the poll is conducted  
 
-Gelman and King incorporated current polls information within a more complex 
-structural model considering the aggregate trial-heat two months before the 
-election, incumbency, GNP rate, approval rating and state variables  
+*Campbell* improved the poor trial-heat literal prediction suggesting a simple 
+regression model that used only trial-heat polls at national level and GDP
+$$\pi_t = \beta_0 + \beta_1 polls_{t-1} + \beta_2 GDP_{t-1}$$
+Information at national level only
 
-Campbell improved the poor trial-heat literal prediction suggesting a simple 
-regression model that used only trial-heat polls at national level  
+
+## Trial-Heat Models
+
+*Gelman & King* incorporated current polls information within a more complex 
+structural model considering the aggregate trial-heat two months before the 
+election, incumbency, GNP rate, approval rating and state variables
+$$
+\begin{aligned}
+\pi_{it} = \beta_0 + \beta_1 polls_{t-1} + \beta_2 GNP_{t-1} + \beta_3 Incumbency_t + \\
++ \beta_4 Approval_t + \beta_i State_i \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+\end{aligned}
+$$
+It is a state level model but polls data was used as a national and aggregated 
+information
 
 
 ## Bayesian Models
 
-Since the late 90s, methods implementing a Bayesian approach have been 
-introduced also in the context of election prediction  
+Since the late 90s, methods following a Bayesian approach have been introduced 
+also in the context of election prediction  
 
 Bayesian models naturally follow the **"voters' enlightenment"** hypothesis 
 because the weights voters attach to fundamental variables are allowed to change 
@@ -135,88 +148,115 @@ during the campaign, accounting for changes in public opinion
 current voters' preferences and improving the performance of structural models  
 
 
-## Bayesian Models - Rigdon et al.
+## Bayesian Models
 
-- Assumes that the beliefs about election's outcomes are based on historical 
-voting trends  
-\  
-- Considers the proportions of **third-party candidates and undecided**  
-\  
-- A **Dirichlet-Multinomial** model with a conjugate prior based on past election 
-results and a likelihood based on current poll data to estimate each candidate's 
-probability of winning a state  
+*Brown & Chappell* proposed a model averaging weighting two models by their 
+posterior model evidence. The **hist** equation represents structural model, 
+while the **poll** equation is the polling model
+<!-- $S_t$ is the percentage of survey respondents for one of the major party -->
+$$
+\begin{aligned}
+\pi_{t}^{hist} = \beta_0 + \beta_1 GDP_{t-1} + \beta_2 Incumbency_t + \epsilon_t \\
+\pi_{t}^{poll} = \alpha_0 + \alpha_1 S_t + u_t \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \\
+\pi_{t} =  w^{hist} \pi_{t}^{hist} + w^{poll} \pi_{t}^{poll} \;\;\;\;\;\;\;\;\;\;\;\;\; 
+\end{aligned}
+$$
+The prediction is a weighted average. The weights are based on the proportion 
+of the variances of the error terms of the two regressions  
+<!-- the relative weight attached to each forecast is larger when its associated 
+forecast error is smaller -->
+\    
+Constantly updates the historical forecasts  
+<!-- as new poll information are available -->
 
 
-## Bayesian Models - Rigdon et al.
+## Bayesian Models
 
-$$X = (X_1, X_2, X_3, X_4) \sim Multinomial(n, p_1, p_2, p_3, p_4)$$
-$$p = (p_1, p_2, p_3, p_4) \sim Dirichlet(b_1, b_2, b_3, b_4)$$
+<!-- *Rigdon et al.* assumed that the beliefs about election's outcomes are based on -->
+<!-- historical voting trends only, hence no structural variables are used -->
 
+*Rigdon et al.* created a **Dirichlet-Multinomial** model with a conjugate prior 
+based on past election results and a likelihood based on current poll data to 
+estimate each candidate's probability of winning a state
+$$
+\begin{aligned}
+p = (p_1, p_2, p_3, p_4) \sim Dirichlet(b_1, b_2, b_3, b_4) \;\;\;\;\;\;\;\;\: \\
+X = (X_1, X_2, X_3, X_4) \sim Multinomial(n, p_1, p_2, p_3, p_4) \\
+P(p|X) \sim Dirichlet(x_1 + b_1, x_2 + b_2, x_3 + b_3, x_4 + b_4) \;
+\end{aligned}
+$$
 where $X_i$ are the sample proportions in a state poll and $p_i$ are the shares 
-in a state of candidate $i$
-<!-- the proportions $p_i$ are assumed to be continuous in $[0,1]$, to satisfy  -->
-<!-- $\sum_{i = 1}^{4} p_i = 1$ and their joint distribution has to be a conjugate prior  -->
+in a state of candidate $i$  
+<!-- the proportions $p_i$ are assumed to be continuous in $[0,1]$, to satisfy -->
+<!-- $\sum_{i = 1}^{4} p_i = 1$ and their joint distribution has to be a conjugate prior -->
 <!-- for a Multinomial. -->
-$$P(p|X) \sim Dirichlet(x_1 + b_1, x_2 + b_2, x_3 + b_3, x_4 + b_4)$$
+
+<!-- The calibration and the choice of parameters are based on historical election reasoning -->
+<!-- expected normal votes for that election, average third party in previous elections, 3% undecided -->
 \    
-The choice of parameters is based on historical election reasoning.  
-\    
-\    
-<!-- For instance, normal votes (i.e. votes from last elections) are used  -->
-<!-- for the two major parties, while for third-party is the combined third-party  -->
-<!-- normal vote, and the level of undecided is assumed to be 3% by previous polls'  -->
-<!-- trends. -->
+Takes into account the proportions of **third-party candidates and undecided**  
 
 
-## Bayesian Models - Linzer
+## Bayesian Models
 
-- The quantity of interest is the Democratic **share of vote in each state**  
-\  
-- Unifies historical forecasts based on **structural variables** with state-level 
-**poll data**  
-\  
-- In each state, voting preferences follow a **reverse random walk**: starting on 
-election day, the estimated intentions evolve randomly going back in time  
+*Lock & Gelman* used a **Normal-Normal** model assuming normality of both the prior, 
+based on historical election results, and the likelihood, based on the poll data
+<!-- justified by the general lack of outliers in state election results and by the  -->
+<!-- large sample size of each poll -->
+$$
+\begin{aligned}
+\pi_{it}^{hist} \sim N(\pi_{i,t-1}, \sigma^2_{h}) \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \\
+\pi_{it}^{poll} \sim N(\pi_{i,0}, \sigma^2_{p}) \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \\
+\pi_{it} \sim N\biggl(\frac{\frac{1}{var(\pi^{poll}_{it})}\pi^{poll}_{it} + \frac{1}{\sigma^2_{h}}\pi_{i,t-1}}{\frac{1}{var(\pi^{poll}_{it})} + \frac{1}{\sigma^2_{h}}}, \frac{1}{\frac{1}{var(\pi^{poll}_{it})} + \frac{1}{\sigma^2_{h}}} \biggr)
+\end{aligned}
+$$
+<!-- the prior variance is estimated using the results from past elections -->
+<!-- the poll variance is estimated using past poll data -->
+States with higher prior precision place more weight on past election results 
+and viceversa (this happened for almost every state)  
 
 
-## Bayesian Models - Linzer
+## Bayesian Models
 
-$$\pi_{ij} = logit^{-1}(\beta_{ij} + \delta_j)$$
-where $\pi_{ij}$ is the share of voting preferences for state $i$ and day $j$,
-$\beta_{ij}$ represents the historical voting preferences in state $i$ and 
-$\delta_j$ is a national effect  
+*Linzer* unified historical forecasts based on **structural variables** with 
+state-level **poll data**
+$$
+\begin{aligned}
+\pi_{it} = logit^{-1}(\beta_{it} + \delta_t) \;\;\;\;\;\;\;\;\;\;\;\; \\
+\beta_{i,t-1} \sim N(\beta_{i,t}, s^2_{\beta}) \;\;\;\;\;\; \delta_{t-1} \sim N(\delta_t, s^2_{\delta}) \\
+\beta_{iT} \sim N(logit(h_i), \sigma_i^2) \;\;\;\;\;\;\;\;\;\;\;\;
+\end{aligned}
+$$
+where $\pi_{it}$ is the share of voting preferences for state $i$ and day $t$,
+$\beta_{it}$ represents the historical voting preferences in state $i$ and 
+$\delta_t$ is a national effect and $h_i$ is the estimate from the TFC model
 <!-- on the logit scale since $\pi_{ij}$ is bounded by 0 and 1 -->
+
+<!-- To obtain an estimate for those days when no polls are available, two reverse -->
+<!-- random walk normal priors for $\beta$ and $\delta$ -->
+<!-- In each state, voting preferences follow a **reverse random walk**: starting on -->
+<!-- election day, the estimated intentions evolve randomly going back in time -->
+
+<!-- The historical forecasts $h_i$ are obtained using the Time-for-Change model and -->
+<!-- are incorporated through a Normal prior for the final outcome $\beta_{iJ}$ -->
+
+<!-- where $\tau_i = 1 / \sigma_i^2$ is the precision and indicates the level of -->
+<!-- certainty on the historical forecasts, that is higher $\tau_i$ implies higher -->
+<!-- weight to historical prediction over new polling data -->
 \    
-To obtain an estimate for those days when no polls are available, two reverse 
-random walk normal priors for $\beta$ and $\delta$
-$$\beta_{i,j-1} \sim N(\beta_{i,j}, s^2_{\beta}) \;\;\;\;\;\; \delta_{j-1} \sim N(\delta_j, s^2_{\delta})$$
-
-
-## Bayesian Models - Linzer
-
-The historical forecasts $h_i$ are obtained using the Time-for-Change model and 
-are incorporated through a Normal prior for the final outcome $\beta_{iJ}$
-$$\beta_{iJ} \sim N(logit(h_i), \sigma_i^2)$$
-where $\tau_i = 1 / \sigma_i^2$ is the precision and indicates the level of 
-certainty on the historical forecasts, that is higher $\tau_i$ implies higher 
-weight to historical prediction over new polling data
-
-
-## Bayesian Models - Linzer
-
 The posterior probability the Democratic candidate wins in state $i$ is 
-calculated as the proportion of draws from $\pi_{iJ}$ greater that 0.5.  
+calculated as the proportion of draws from $\pi_{iT}$ greater that 0.5  
 
-In particular, when the election is soon estimates of $\pi_{iJ}$ are based 
-primarily on poll data, whereas if the election is farther ahead are driven by 
-the historical prior.  
+<!-- In particular, when the election is soon estimates of $\pi_{iJ}$ are based -->
+<!-- primarily on poll data, whereas if the election is farther ahead are driven by -->
+<!-- the historical prior. -->
 
 
 # 4. Conclusions
 
 ## Conclusions
 
-- A Bayesian approach to produces **continuously revised forecasts** as new poll 
+- A Bayesian approach produces **continuously revised forecasts** as new poll 
 data is released  
 
 - **Comparing performances** of different models is difficult (different elections, 
@@ -235,14 +275,14 @@ polled few and in those days with no polls at all
 
 - **Web data** as a source of spontaneous public opinions to solve lack of data 
 issues (as *Rizk et al., 2023*)  
-<!-- Social networks, blogs and forums contain a huge amount of data related to  -->
-<!-- individuals' preferences that can be exploited during the election period to  -->
+<!-- Social networks, blogs and forums contain a huge amount of data related to -->
+<!-- individuals' preferences that can be exploited during the election period to -->
 <!-- estimate the share of vote for all the candidates over all the states. -->
 
 - **Correlated vote intentions** across states (for example, if a candidate is 
 performing bad in a state, this might indicate that he will also underperform in 
 other states)  
-<!-- possibly because there were hidden voters for the opposing candidate that  -->
+<!-- possibly because there were hidden voters for the opposing candidate that -->
 <!-- polls missed in that state and may equally have been missed in others). -->
 
 These factors may help to improve early forecast accuracy of the models
