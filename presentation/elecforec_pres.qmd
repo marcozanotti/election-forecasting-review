@@ -29,7 +29,7 @@ link-citations: TRUE
 
 ## Problem
 
-Producing **timely and accurately prediction** of election results  
+To predict **timely and accurately** the election results  
 \   
 **Strategical task** in the political area since political forces spend millions of 
 dollars in each candidate's campaign and need to know when and where to allocate 

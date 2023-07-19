@@ -173,8 +173,8 @@ University of Milano Bicocca\\
 \bigskip
 \begin{abstract}
 Forecasting presidential elections is a well-studied topic given its
-relevance within the political field. Producing timely and accurately
-prediction of the final election outcome is still not an easy task. Many
+relevance within the political field. Producing prediction of the final
+election outcome timely and accurately is still not an easy task. Many
 different methods have been developed over the years, trying to take
 into account different sources of data available, from fundamental
 economic and political variables to state-level poll data. These methods
@@ -193,7 +193,7 @@ predictions over structural or polling models alone.
 
 \newpage
 \spacingset{1.9} % DON'T change the spacing!
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, boxrule=0pt, enhanced, sharp corners, interior hidden, borderline west={3pt}{0pt}{shadecolor}, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, interior hidden, borderline west={3pt}{0pt}{shadecolor}, sharp corners, enhanced, breakable, frame hidden]}{\end{tcolorbox}}\fi
 
 \setstretch{1.2}
 \hypertarget{sec-intro}{%
@@ -363,17 +363,22 @@ within a more complex structural model considering the aggregate
 trial-heat two months before the election, incumbency, GNP rate,
 approval rating, state specific variables (the last two state's election
 results, home advantage, partisanship, ideology and distance between the
-state and the candidate ideology), and some regional variables. The
-novelty of this approach rely on the fact that the authors proposed a
-model allowing to estimate the share of votes in each state. However,
-polls data was used as a national information and the predictions were
-produced 2 months before the elections only.
+state and the candidate ideology), and some regional variables. \[
+\begin{aligned}
+\pi_{it} = \beta_0 + \beta_1 polls_{t-1} + \beta_2 GNP_{t-1} + \beta_3 Incumbency_t + \\
++ \beta_4 Approval_t + \beta_i State_i \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+\end{aligned}
+\] The novelty of this approach rely on the fact that the authors
+proposed a model allowing to estimate the share of votes in each state.
+However, polls data was used as a national information and the
+predictions were produced 2 months before the elections only.
 
 \citet{cam:1996}, instead, improved the poor trial-heat literal
 prediction suggesting a simple regression model that uses only
 trial-heat polls at national level and the second quarter growth rate of
 GDP, and obtaining a forecasting performance comparable to that of
 previous methods, but at national level only.
+\[\pi_t = \beta_0 + \beta_1 polls_{t-1} + \beta_2 GDP_{t-1}\]
 
 \hypertarget{bayesian-models}{%
 \subsection{Bayesian Models}\label{bayesian-models}}
@@ -396,17 +401,20 @@ quarters of the election year and the incumbency dummy). The \emph{poll}
 equation, instead, is the polling model, in which voting outcomes
 depends on the percentage of survey respondents for that party (in the
 general version the authors considered also the length of the interval
-between poll date and election day).
-\[\pi_{t}^{hist} = \beta X_t + \epsilon_t \;\;\;\;\;\; \pi_{t}^{poll} = \alpha_0 + \alpha_1 S_t + u_t\]
-The final prediction for the election outcome is a weighted average of
-the historical and the poll estimates, where the weights, \(w^{hist}\)
-and \(w^{poll}\), are based on the proportion of the variances of the
-error terms of the two regressions.
-\[\pi_{t} =  w^{hist} \pi_{t}^{hist} + w^{poll} \pi_{t}^{poll}\] Through
-this formulation the historical forecast is constantly updated as new
-poll information are available. On average, from 1952-1992, this
-strategy outperformed the forecasts produced by structural models and
-literal polling alone.
+between poll date and election day). \[
+\begin{aligned}
+\pi_{t}^{hist} = \beta_0 + \beta_1 GDP_{t-1} + \beta_2 Incumbency_t + \epsilon_t \\
+\pi_{t}^{poll} = \alpha_0 + \alpha_1 S_t + u_t \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \\
+\pi_{t} =  w^{hist} \pi_{t}^{hist} + w^{poll} \pi_{t}^{poll} \;\;\;\;\;\;\;\;\;\;\;\;\; 
+\end{aligned}
+\] The final prediction for the election outcome is a weighted average
+of the historical and the poll estimates, where the weights,
+\(w^{hist}\) and \(w^{poll}\), are based on the proportion of the
+variances of the error terms of the two regressions. Through this
+formulation the historical forecast is constantly updated as new poll
+information are available. On average, from 1952-1992, this strategy
+outperformed the forecasts produced by structural models and literal
+polling alone.
 
 However, it is also reasonable to assume that the beliefs about
 election's outcomes are based on historical voting trends. Following
@@ -441,11 +449,14 @@ distribution for the Democratic vote share in each state. The authors
 assumed normality of both the prior (based on historical election
 results), justified by the general lack of outliers in state election
 results, and the likelihood (based on the poll data), justified by the
-large sample size of each poll.
-\[d_{i,0}|d_{i,t-1} \sim N(d_{i,t-1}, \sigma^2_{d_{i,0}|d_{i,t-1}})\]
-\[d_{i,t}|d_{i,0} \sim N(d_{i,0}, \frac{p_{i,0}(1-p_{i,0})}{n_{i,t}} \sigma^2_{d_{i,t}|d_{i,0}})\]
-The prior gives a distribution for the state \(i\) share of vote in the
-current election given each state's share of vote in the previous
+large sample size of each poll. \[
+\begin{aligned}
+\pi_{it}^{hist} \sim N(\pi_{i,t-1}, \sigma^2_{h}) \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \\
+\pi_{it}^{poll} \sim N(\pi_{i,0}, \sigma^2_{p}) \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \\
+\pi_{it} \sim N\biggl(\frac{\frac{1}{var(\pi^{poll}_{it})}\pi^{poll}_{it} + \frac{1}{\sigma^2_{h}}\pi_{i,t-1}}{\frac{1}{var(\pi^{poll}_{it})} + \frac{1}{\sigma^2_{h}}}, \frac{1}{\frac{1}{var(\pi^{poll}_{it})} + \frac{1}{\sigma^2_{h}}} \biggr)
+\end{aligned}
+\] The prior gives a distribution for the state \(i\) share of vote in
+the current election given each state's share of vote in the previous
 election, while the likelihood gives the distribution of a state poll,
 conducted \(t\) months before the election given the state's share of
 vote in the current election. Also in this case, the parameters are
@@ -453,9 +464,11 @@ estimated using historical election results (for the prior) and
 historical poll data (for the likelihood). The posterior distribution is
 then obtained by combining the prior with the likelihood, giving a
 Normal-Normal Mixture model which allows to continuously update each
-state's share of vote as new polls are available. Although this approach
-does not consider directly any fundamental variable, it produced very
-accurate results in forecasting 2008 US election.
+state's share of vote as new polls are available. In particular, states
+with higher prior precision (lower variance) place more weight on past
+election results and viceversa. Although this approach does not consider
+directly any fundamental variable, it produced very accurate results in
+forecasting 2008 US election.
 
 \citep{lin:2013} combined several aspects of previous methods in a more
 complex Bayesian model. The quantity of interest is still the Democratic
@@ -508,8 +521,7 @@ Using this model, starting from final 6 months of the election year (for
 availability of fundamental variables), it is possible to continuously
 update the forecasts of the final election as new polls data is
 available, improving the performance over both the baseline structural
-model and the literal poll predictions (at least in 2008 elections).
-However, forecast errors are large in infrequently polled states.
+model and the literal poll predictions.
 
 \hypertarget{sec-conc}{%
 \section{Conclusion}\label{sec-conc}}
