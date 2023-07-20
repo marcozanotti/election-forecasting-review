@@ -259,11 +259,9 @@ calculated as the proportion of draws from $\pi_{iT}$ greater that 0.5
 - A Bayesian approach produces **continuously revised forecasts** as new poll 
 data is released  
 
-- **Comparing performances** of different models is difficult (different elections, 
-different horizons, different purposes)  
+- Forecasting using **both** structural variables and poll data outperform others  
 
-- In general, forecasts are accurate **within 2 months** before the election day 
-and forecasting using both structural variables and poll data outperform others  
+- In general, forecasts are accurate **within 2 months** before the election day  
 
 - It is **still difficult** to produce timely and accurate forecasts  
 

@@ -267,7 +267,7 @@ reasoning. The major contribution of this model is the incorporation of the
 uncertainty given by third-party preferences and undecided, while the major 
 drawback is the absence of structural variables.
 
-[@loc:gel:2010] followed a similar approach to estimate a posterior distribution
+@loc:gel:2010 followed a similar approach to estimate a posterior distribution
 for the Democratic vote share in each state. The authors assumed normality of 
 both the prior (based on historical election results), justified by the general 
 lack of outliers in state election results, and the likelihood (based on the poll 
@@ -292,7 +292,7 @@ variance) place more weight on past election results and viceversa. Although thi
 approach does not consider directly any fundamental variable, it produced very 
 accurate results in forecasting 2008 US election.
 
-[@lin:2013] combined several aspects of previous methods in a more complex Bayesian 
+@lin:2013 combined several aspects of previous methods in a more complex Bayesian 
 model. The quantity of interest is still the Democratic share of vote in each 
 state and it is estimated unifying historical forecasts based on structural
 variables (as opposed to use past election results only) with state-level poll data.
