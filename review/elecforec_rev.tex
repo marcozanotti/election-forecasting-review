@@ -193,7 +193,7 @@ predictions over structural or polling models alone.
 
 \newpage
 \spacingset{1.9} % DON'T change the spacing!
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, interior hidden, borderline west={3pt}{0pt}{shadecolor}, sharp corners, enhanced, breakable, frame hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, frame hidden, sharp corners, interior hidden, enhanced, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt]}{\end{tcolorbox}}\fi
 
 \setstretch{1.2}
 \hypertarget{sec-intro}{%
@@ -434,10 +434,10 @@ Moreover, the proportions \(p_i\) are assumed to be continuous in
 distribution has to be a conjugate prior for a Multinomial. Hence, \(p\)
 is assumed to follow a Dirichlet
 \[p = (p_1, p_2, p_3, p_4) \sim Dirichlet(b_1, b_2, b_3, b_4)\]
-\[p_i \sim BETA(b_i, \sum_{k = 1}^{4} b_k - b_i)\] and each \(p_i\) is
+\[p_i \sim Beta(b_i, \sum_{k = 1}^{4} b_k - b_i)\] and each \(p_i\) is
 distributed as a Beta random variable. Hence, by conjugacy, the
 posterior distribution is a Dirichlet with updated parameters.
-\[h(p|X) \sim DIRICHLET(x_1 + b_1, x_2 + b_2, x_3 + b_3, x_4 + b_4)\]
+\[h(p|X) \sim Dirichlet(x_1 + b_1, x_2 + b_2, x_3 + b_3, x_4 + b_4)\]
 The calibration and the choice of parameters are based on historical
 election reasoning. The major contribution of this model is the
 incorporation of the uncertainty given by third-party preferences and
