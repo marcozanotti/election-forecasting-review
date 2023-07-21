@@ -150,9 +150,9 @@ current voters' preferences and improving the performance of structural models
 
 ## Bayesian Models
 
-*Brown & Chappell* proposed a model averaging weighting two models by their 
-posterior model evidence. The **hist** equation represents structural model, 
-while the **poll** equation is the polling model
+*Brown & Chappell* proposed a model averaging weighting two models: the **hist** 
+equation represents structural model, while the **poll** equation is the polling 
+model
 <!-- $S_t$ is the percentage of survey respondents for one of the major party -->
 $$
 \begin{aligned}
